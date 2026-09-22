@@ -22,7 +22,7 @@ The full app is live at **[kavu-drying.web.app](https://kavu-drying.web.app/)**.
 - [Devpost project image](../../output/kavu-devpost-thumbnail.png), 1200 x 800
 - [Overview gallery image](../../output/gallery/kavu-overview.png), [batch register](../../output/gallery/kavu-batches.png) and [mobile interface](../../output/gallery/kavu-mobile.png)
 
-The verified [Devpost upload](../../output/kavu-submission.zip) is approximately 2.02 MB and contains generated artifacts, final captions, submission materials and the frozen source. Video is excluded to stay within the 35 MB limit. The [full kit](../../output/kavu-submission-kit.zip), approximately 18.4 MB, also includes the narrated MP4. Both archives passed integrity and exclusion checks.
+The verified [Devpost upload](https://github.com/shi1720/Hack-The-Weather/releases/download/v2.0.0/kavu-submission.zip) is approximately 2.02 MB and contains generated artifacts, final captions, submission materials and the frozen source. Video is excluded to stay within the 35 MB limit. The [full kit](https://github.com/shi1720/Hack-The-Weather/releases/download/v2.0.0/kavu-submission-kit.zip), approximately 18.4 MB, also includes the narrated MP4. Both archives passed integrity and exclusion checks.
 
 The completed narrated video uses a disclosed stock AI voice. Its ten segments preserve the 500-word script, with 66 timed caption cues. The 1080p MP4 is exactly 265.000 seconds and 10,842,049 bytes. Public YouTube playback, 1080p HD and native English captions are verified. The earlier [silent demonstration](../../output/kavu-demo-silent.mp4) and [human recording instructions](recording-notes.md) remain available as alternate editing assets.
 
@@ -54,10 +54,10 @@ The updated deck, brief and narration use this same example. The Conduit weather
 
 ## Devpost progress
 
-Project details are saved at step 3 of 5. The verified preview renders the seven requested headings, 12 technology tags, three gallery images, two try-it links and the correct public video. Shivam's contribution text is saved with accurate scope. Additional-information answers are filled, with the ZIP attachment and save still pending. These saved details are not a claim that final submission or eligibility is complete.
+**Submitted on 22 September 2026.** Devpost confirmed “Project submitted!” and the [public project page](https://devpost.com/software/kavu-1utp83) shows “Submitted to Hack The Weather”. The entry includes all seven story headings, 12 technology tags, three gallery images, the app and repository links, the public video, four additional answers and the verified source/document ZIP. Shivam's contribution text is saved with accurate scope. The user requested submission now and will add a teammate later. Devpost permits edits until the deadline; submission confirmation does not establish team eligibility or satisfy the outstanding human appearance requirement.
 
 ## Human completion requirements
 
-The team still needs real eligible participants, accurate contributions, actual member appearances in the official video and final Devpost submission. A disclosed AI narrator can supply the audio but cannot appear as a human teammate. See the [handoff](human-handoff.md).
+The team still needs real eligible participants, accurate contributions, actual member appearances in the official video, and those updates saved before the deadline. A disclosed AI narrator can supply the audio but cannot appear as a human teammate. See the [handoff](human-handoff.md).
 
 The deadline is **26 September 2026, 02:15 IST**, equivalent to **25 September 2026, 23:45 EAT**. [Official event page](https://hack-the-weather.devpost.com/)

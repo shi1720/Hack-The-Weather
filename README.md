@@ -5,7 +5,7 @@
 
 **The drying operations desk for maize cooperatives.**
 
-[Open Kavu](https://kavu-drying.web.app/) · [Watch the demo](https://www.youtube.com/watch?v=iyu0CjoYOgM) · [Download the complete kit](https://github.com/shi1720/Hack-The-Weather/releases/download/v2.0.0/kavu-submission-kit.zip) · [Pitch deck](output/kavu-pitch.pptx) · [Project brief](output/pdf/kavu-brief.pdf) · [Narrated demo script](docs/submission/narration-v2.md)
+[Open Kavu](https://kavu-drying.web.app/) · [Watch the demo](https://www.youtube.com/watch?v=iyu0CjoYOgM) · [Devpost entry](https://devpost.com/software/kavu-1utp83) · [Download the complete kit](https://github.com/shi1720/Hack-The-Weather/releases/download/v2.0.0/kavu-submission-kit.zip) · [Pitch deck](output/kavu-pitch.pptx) · [Project brief](output/pdf/kavu-brief.pdf) · [Narrated demo script](docs/submission/narration-v2.md)
 
 Built for **Hack the Weather 2026**, using real **JKUAT Conduit@Empathy** observations.
 

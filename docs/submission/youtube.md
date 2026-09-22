@@ -54,7 +54,7 @@ Built for Hack The Weather 2026. The first proposed customer is a cooperative or
 - Public visibility, playback, 4:25 duration, 1080p HD and native English captions are verified.
 - The supplied 66-cue SRT is published. Description chapters match the exact final edit documented in [recording notes](narrated-recording-notes.md).
 - This public walkthrough can use disclosed stock AI narration. The official hackathon submission cut still needs the real eligible team members to appear. [Official rules](https://hack-the-weather.devpost.com/rules)
-- The Devpost project-details preview now embeds the correct public video. Additional-information upload and final submission remain separate steps.
+- The Devpost project-details preview now embeds the correct public video. The four additional answers and verified ZIP are saved, and Devpost confirmed submission on 22 September 2026.
 
 ## Publication record
 
@@ -62,4 +62,5 @@ Built for Hack The Weather 2026. The first proposed customer is a cooperative or
 - Video generation: completed [narrated MP4](../../output/kavu-demo-narrated.mp4), exactly 265.000 seconds, 1920 x 1080, 10,842,049 bytes. The [SRT](../../output/kavu-demo-narrated.srt) contains 66 cues covering all 500 narration words. See [capture and verification notes](narrated-recording-notes.md).
 - Public YouTube watch URL: https://www.youtube.com/watch?v=iyu0CjoYOgM. Publication verified. Studio reports Video published and both checks show No issues. Anonymous oEmbed confirms the title, author and embed URL.
 - Playback verification: the public watch page shows 4:25 and playback advanced to 0:11. The implementation owner selected 1080p HD and English CC; the native English caption text appeared during playback. All 66 imported cues are published. Burned captions also remain visible in the video.
+- Devpost submission: confirmed on 22 September 2026 at https://devpost.com/software/kavu-1utp83. Edits remain possible until the deadline.
 - Human team appearances in official submission cut: pending actual footage.
