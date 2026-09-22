@@ -1,0 +1,402 @@
+{
+  "title": "Kavu controlled retrospective decision evaluation",
+  "generatedAt": "2026-09-22T06:00:00.000Z",
+  "purpose": "Demonstrate that real Conduit conditions causally change operational recommendations while batch weights, moisture, deadlines, capacity, rates and planning date remain identical.",
+  "design": "For comparison only, hourly timestamps from September 15 and September 8 are shifted onto the September 12 operational clock, preserving their Nairobi hour of day and all weather values. The production dataset is untouched. September 8 is a genuine no-observation day. The fourth scenario removes weather entirely. These are counterfactual workflow scenarios, not forecasts, predictions or measured outcomes.",
+  "noClaims": [
+    "No trained ML model or forecast skill score",
+    "No measured moisture reduction or assumed drying completion",
+    "No avoided-loss, energy or financial-savings claim",
+    "No food safety or aflatoxin claim",
+    "No real customers, interviews or field pilot"
+  ],
+  "datasetSha256": "87a49393c721f6b84f46ee4bae63be57ceaed767b1d1810554228001c932cdd8",
+  "sourceFiles": [
+    {
+      "file": "conduit-aug28-sep03.csv",
+      "url": "https://drive.google.com/file/d/1uQLj3WHvGeX6WRU3EL0ZcLTDVI_Gl23P/view",
+      "sha256": "a47659033c861155500df0cf1e335e387d68ec7ea69b28fd94e73a8cf68fec52",
+      "rows": 7060
+    },
+    {
+      "file": "conduit-aug31-sep04.csv",
+      "url": "https://drive.google.com/file/d/192QZkcS3F3B1OnfxvARbvLs-ZGR3abwE/view",
+      "sha256": "1260fb7376977672480df0cfd119cc9f222e95cd0133e3ed3d8912079cbe1bcb",
+      "rows": 7067
+    },
+    {
+      "file": "conduit-sep11-sep15.csv",
+      "url": "https://drive.google.com/file/d/1XQo9JstB_RzGi40MByI88TLQNQHqXV4Q/view",
+      "sha256": "1082cdbe145167a63a49ff74dd037662d4dd94e9e4d78ed8da19455744200e30",
+      "rows": 7062
+    }
+  ],
+  "fixedInputs": {
+    "planningDate": "2026-09-12",
+    "analysisClock": "2026-09-22T06:00:00.000Z",
+    "settings": {
+      "name": "Controlled evaluation yard",
+      "capacityKg": 3000,
+      "targetMoisturePct": 13,
+      "dryerRateKes": 377.8,
+      "latitude": -1.0916,
+      "longitude": 37.014,
+      "maxDistanceKm": 10
+    },
+    "batches": [
+      {
+        "id": "A",
+        "name": "Priority intake",
+        "weightKg": 1800,
+        "moisturePct": 18.2,
+        "deadline": "2026-09-12",
+        "farmer": "Fictional evaluation batch",
+        "initialMoisturePct": 18.2,
+        "targetMoisturePct": 13,
+        "receivedAt": "2026-09-12T03:00:00Z",
+        "status": "queued",
+        "bay": null,
+        "measurements": [
+          {
+            "id": "intake-A",
+            "moisturePct": 18.2,
+            "measuredAt": "2026-09-12T03:00:00Z",
+            "note": "Fictional evaluation input; not a pilot observation."
+          }
+        ]
+      },
+      {
+        "id": "B",
+        "name": "Next-day intake",
+        "weightKg": 900,
+        "moisturePct": 16.1,
+        "deadline": "2026-09-13",
+        "farmer": "Fictional evaluation batch",
+        "initialMoisturePct": 16.1,
+        "targetMoisturePct": 13,
+        "receivedAt": "2026-09-12T03:00:00Z",
+        "status": "queued",
+        "bay": null,
+        "measurements": [
+          {
+            "id": "intake-B",
+            "moisturePct": 16.1,
+            "measuredAt": "2026-09-12T03:00:00Z",
+            "note": "Fictional evaluation input; not a pilot observation."
+          }
+        ]
+      },
+      {
+        "id": "C",
+        "name": "Flexible intake",
+        "weightKg": 650,
+        "moisturePct": 14.5,
+        "deadline": "2026-09-14",
+        "farmer": "Fictional evaluation batch",
+        "initialMoisturePct": 14.5,
+        "targetMoisturePct": 13,
+        "receivedAt": "2026-09-12T03:00:00Z",
+        "status": "queued",
+        "bay": null,
+        "measurements": [
+          {
+            "id": "intake-C",
+            "moisturePct": 14.5,
+            "measuredAt": "2026-09-12T03:00:00Z",
+            "note": "Fictional evaluation input; not a pilot observation."
+          }
+        ]
+      },
+      {
+        "id": "D",
+        "name": "At-target intake",
+        "weightKg": 500,
+        "moisturePct": 12.8,
+        "deadline": "2026-09-12",
+        "farmer": "Fictional evaluation batch",
+        "initialMoisturePct": 12.8,
+        "targetMoisturePct": 13,
+        "receivedAt": "2026-09-12T03:00:00Z",
+        "status": "queued",
+        "bay": null,
+        "measurements": [
+          {
+            "id": "intake-D",
+            "moisturePct": 12.8,
+            "measuredAt": "2026-09-12T03:00:00Z",
+            "note": "Fictional evaluation input; not a pilot observation."
+          }
+        ]
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "favourable",
+      "label": "Real Conduit weather: 12 September",
+      "weatherSourceDate": "2026-09-12",
+      "mode": "replay",
+      "planningDate": "2026-09-12",
+      "confidence": "good",
+      "favourableHours": 6,
+      "coverByEAT": "17:00",
+      "allocatedOrOccupiedKg": 2700,
+      "remainingCapacityKg": 300,
+      "suggestedDryerBudgetKes": 0,
+      "decisions": [
+        {
+          "batch": "A",
+          "action": "spread",
+          "assignedKg": 1800,
+          "dryerQuoteKes": 3536.21,
+          "title": "Spread at 11:00 EAT",
+          "reason": "6 contiguous favourable hours; reserve 1,800 kg of yard capacity. Turn and measure during work; cover by 17:00 EAT or immediately if conditions change. Completion is determined by meter readings."
+        },
+        {
+          "batch": "D",
+          "action": "measure",
+          "assignedKg": 0,
+          "dryerQuoteKes": 0,
+          "title": "Verify moisture before storage",
+          "reason": "12.8% is at the operating target. Take a fresh representative meter reading; weather alone cannot confirm grain condition."
+        },
+        {
+          "batch": "B",
+          "action": "spread",
+          "assignedKg": 900,
+          "dryerQuoteKes": 1054.06,
+          "title": "Spread at 11:00 EAT",
+          "reason": "6 contiguous favourable hours; reserve 900 kg of yard capacity. Turn and measure during work; cover by 17:00 EAT or immediately if conditions change. Completion is determined by meter readings."
+        },
+        {
+          "batch": "C",
+          "action": "cover",
+          "assignedKg": 0,
+          "dryerQuoteKes": 368.36,
+          "title": "Hold for the next yard slot",
+          "reason": "This whole 650 kg batch does not fit the remaining 300 kg yard capacity. No partial allocation or unmeasured completion is assumed."
+        }
+      ],
+      "notices": [
+        "Weather suitability is a transparent operating heuristic, not a grain-moisture forecast or food-safety assessment. Use a moisture meter and local operating procedures.",
+        "Historical replay uses weather observed during the selected day, including observations after each decision time. It demonstrates the workflow; it is not a forecast backtest.",
+        "Dryer estimates use tonnes × moisture percentage points × the configured rate; transport, minimum charges, tax changes and dryer availability require confirmation. They are not measured savings."
+      ]
+    },
+    {
+      "id": "humid",
+      "label": "Real Conduit weather: 15 September",
+      "weatherSourceDate": "2026-09-15",
+      "mode": "replay",
+      "planningDate": "2026-09-12",
+      "confidence": "good",
+      "favourableHours": 0,
+      "coverByEAT": null,
+      "allocatedOrOccupiedKg": 0,
+      "remainingCapacityKg": 3000,
+      "suggestedDryerBudgetKes": 3536.21,
+      "decisions": [
+        {
+          "batch": "A",
+          "action": "dryer",
+          "assignedKg": 0,
+          "dryerQuoteKes": 3536.21,
+          "title": "Arrange drying before the deadline",
+          "reason": "No verified contiguous two-hour outdoor window is available and the batch is due within this planning day. Confirm a dryer slot; the quote is indicative."
+        },
+        {
+          "batch": "D",
+          "action": "measure",
+          "assignedKg": 0,
+          "dryerQuoteKes": 0,
+          "title": "Verify moisture before storage",
+          "reason": "12.8% is at the operating target. Take a fresh representative meter reading; weather alone cannot confirm grain condition."
+        },
+        {
+          "batch": "B",
+          "action": "cover",
+          "assignedKg": 0,
+          "dryerQuoteKes": 1054.06,
+          "title": "Keep protected; reassess conditions",
+          "reason": "No verified contiguous two-hour outdoor window is available. Keep protected according to local handling procedures, monitor moisture and arrange drying if delay becomes unacceptable."
+        },
+        {
+          "batch": "C",
+          "action": "cover",
+          "assignedKg": 0,
+          "dryerQuoteKes": 368.36,
+          "title": "Keep protected; reassess conditions",
+          "reason": "No verified contiguous two-hour outdoor window is available. Keep protected according to local handling procedures, monitor moisture and arrange drying if delay becomes unacceptable."
+        }
+      ],
+      "notices": [
+        "Weather suitability is a transparent operating heuristic, not a grain-moisture forecast or food-safety assessment. Use a moisture meter and local operating procedures.",
+        "Historical replay uses weather observed during the selected day, including observations after each decision time. It demonstrates the workflow; it is not a forecast backtest.",
+        "Dryer estimates use tonnes × moisture percentage points × the configured rate; transport, minimum charges, tax changes and dryer availability require confirmation. They are not measured savings."
+      ]
+    },
+    {
+      "id": "gap",
+      "label": "Real Conduit gap: 8 September",
+      "weatherSourceDate": "2026-09-08",
+      "mode": "replay",
+      "planningDate": "2026-09-12",
+      "confidence": "unavailable",
+      "favourableHours": 0,
+      "coverByEAT": null,
+      "allocatedOrOccupiedKg": 0,
+      "remainingCapacityKg": 3000,
+      "suggestedDryerBudgetKes": 3536.21,
+      "decisions": [
+        {
+          "batch": "A",
+          "action": "dryer",
+          "assignedKg": 0,
+          "dryerQuoteKes": 3536.21,
+          "title": "Arrange drying before the deadline",
+          "reason": "No verified contiguous two-hour outdoor window is available and the batch is due within this planning day. Confirm a dryer slot; the quote is indicative."
+        },
+        {
+          "batch": "D",
+          "action": "measure",
+          "assignedKg": 0,
+          "dryerQuoteKes": 0,
+          "title": "Verify moisture before storage",
+          "reason": "12.8% is at the operating target. Take a fresh representative meter reading; weather alone cannot confirm grain condition."
+        },
+        {
+          "batch": "B",
+          "action": "cover",
+          "assignedKg": 0,
+          "dryerQuoteKes": 1054.06,
+          "title": "Keep protected; reassess conditions",
+          "reason": "No verified contiguous two-hour outdoor window is available. Keep protected according to local handling procedures, monitor moisture and arrange drying if delay becomes unacceptable."
+        },
+        {
+          "batch": "C",
+          "action": "cover",
+          "assignedKg": 0,
+          "dryerQuoteKes": 368.36,
+          "title": "Keep protected; reassess conditions",
+          "reason": "No verified contiguous two-hour outdoor window is available. Keep protected according to local handling procedures, monitor moisture and arrange drying if delay becomes unacceptable."
+        }
+      ],
+      "notices": [
+        "Weather suitability is a transparent operating heuristic, not a grain-moisture forecast or food-safety assessment. Use a moisture meter and local operating procedures.",
+        "Historical replay uses weather observed during the selected day, including observations after each decision time. It demonstrates the workflow; it is not a forecast backtest.",
+        "0 of 9 daytime hours have usable weather coverage. Missing hours are never treated as dry.",
+        "Dryer estimates use tonnes × moisture percentage points × the configured rate; transport, minimum charges, tax changes and dryer availability require confirmation. They are not measured savings."
+      ]
+    },
+    {
+      "id": "ablated",
+      "label": "Conduit removed from the 12 September case",
+      "weatherSourceDate": null,
+      "mode": "replay",
+      "planningDate": "2026-09-12",
+      "confidence": "unavailable",
+      "favourableHours": 0,
+      "coverByEAT": null,
+      "allocatedOrOccupiedKg": 0,
+      "remainingCapacityKg": 3000,
+      "suggestedDryerBudgetKes": 3536.21,
+      "decisions": [
+        {
+          "batch": "A",
+          "action": "dryer",
+          "assignedKg": 0,
+          "dryerQuoteKes": 3536.21,
+          "title": "Arrange drying before the deadline",
+          "reason": "No verified contiguous two-hour outdoor window is available and the batch is due within this planning day. Confirm a dryer slot; the quote is indicative."
+        },
+        {
+          "batch": "D",
+          "action": "measure",
+          "assignedKg": 0,
+          "dryerQuoteKes": 0,
+          "title": "Verify moisture before storage",
+          "reason": "12.8% is at the operating target. Take a fresh representative meter reading; weather alone cannot confirm grain condition."
+        },
+        {
+          "batch": "B",
+          "action": "cover",
+          "assignedKg": 0,
+          "dryerQuoteKes": 1054.06,
+          "title": "Keep protected; reassess conditions",
+          "reason": "No verified contiguous two-hour outdoor window is available. Keep protected according to local handling procedures, monitor moisture and arrange drying if delay becomes unacceptable."
+        },
+        {
+          "batch": "C",
+          "action": "cover",
+          "assignedKg": 0,
+          "dryerQuoteKes": 368.36,
+          "title": "Keep protected; reassess conditions",
+          "reason": "No verified contiguous two-hour outdoor window is available. Keep protected according to local handling procedures, monitor moisture and arrange drying if delay becomes unacceptable."
+        }
+      ],
+      "notices": [
+        "Weather suitability is a transparent operating heuristic, not a grain-moisture forecast or food-safety assessment. Use a moisture meter and local operating procedures.",
+        "Historical replay uses weather observed during the selected day, including observations after each decision time. It demonstrates the workflow; it is not a forecast backtest.",
+        "0 of 9 daytime hours have usable weather coverage. Missing hours are never treated as dry.",
+        "Dryer estimates use tonnes × moisture percentage points × the configured rate; transport, minimum charges, tax changes and dryer availability require confirmation. They are not measured savings."
+      ]
+    }
+  ],
+  "comparison": [
+    {
+      "scenario": "humid",
+      "changedActions": [
+        {
+          "batch": "A",
+          "before": "spread",
+          "after": "dryer"
+        },
+        {
+          "batch": "B",
+          "before": "spread",
+          "after": "cover"
+        }
+      ],
+      "changeInOutdoorAllocationKg": -2700
+    },
+    {
+      "scenario": "gap",
+      "changedActions": [
+        {
+          "batch": "A",
+          "before": "spread",
+          "after": "dryer"
+        },
+        {
+          "batch": "B",
+          "before": "spread",
+          "after": "cover"
+        }
+      ],
+      "changeInOutdoorAllocationKg": -2700
+    },
+    {
+      "scenario": "ablated",
+      "changedActions": [
+        {
+          "batch": "A",
+          "before": "spread",
+          "after": "dryer"
+        },
+        {
+          "batch": "B",
+          "before": "spread",
+          "after": "cover"
+        }
+      ],
+      "changeInOutdoorAllocationKg": -2700
+    }
+  ],
+  "conclusions": [
+    "With favourable observed weather, two whole batches receive 2,700 kg of the 3,000 kg yard capacity; the 650 kg overflow batch waits.",
+    "With unsuitable observed weather, there is no outdoor allocation. The same-day priority batch receives an indicative mechanical-dryer referral; later batches stay protected.",
+    "Removing Conduit produces no outdoor authorization. A real missing-data day also produces no outdoor authorization, with unavailable rather than good evidence confidence.",
+    "The at-target intake always requires a fresh measured reading. Weather does not substitute for grain measurement.",
+    "Differences establish functional dependence on Conduit data, not business impact. Prospective operator testing is required to measure labour, cost, loss or energy effects."
+  ]
+}

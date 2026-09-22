@@ -1,0 +1,224 @@
+{
+  "rawRows": 21189,
+  "uniqueRows": 18364,
+  "duplicatesRemoved": 2825,
+  "invalidRows": 0,
+  "firstAt": "2026-08-28T00:00:25.000Z",
+  "lastAt": "2026-09-15T23:58:29.000Z",
+  "days": [
+    "2026-08-28",
+    "2026-08-29",
+    "2026-08-30",
+    "2026-08-31",
+    "2026-09-01",
+    "2026-09-02",
+    "2026-09-03",
+    "2026-09-04",
+    "2026-09-05",
+    "2026-09-06",
+    "2026-09-07",
+    "2026-09-08",
+    "2026-09-09",
+    "2026-09-10",
+    "2026-09-11",
+    "2026-09-12",
+    "2026-09-13",
+    "2026-09-14",
+    "2026-09-15",
+    "2026-09-16"
+  ],
+  "gaps": [
+    {
+      "from": "2026-09-04T23:58:18.000Z",
+      "to": "2026-09-11T00:00:01.000Z",
+      "hours": 144.029
+    }
+  ],
+  "station": {
+    "name": "JKUAT Conduit @ Empathy · Juja",
+    "latitude": -1.099736,
+    "longitude": 37.014528,
+    "elevationM": 1523
+  },
+  "sources": [
+    {
+      "file": "conduit-aug28-sep03.csv",
+      "url": "https://drive.google.com/file/d/1uQLj3WHvGeX6WRU3EL0ZcLTDVI_Gl23P/view",
+      "sha256": "a47659033c861155500df0cf1e335e387d68ec7ea69b28fd94e73a8cf68fec52",
+      "rows": 7060
+    },
+    {
+      "file": "conduit-aug31-sep04.csv",
+      "url": "https://drive.google.com/file/d/192QZkcS3F3B1OnfxvARbvLs-ZGR3abwE/view",
+      "sha256": "1260fb7376977672480df0cfd119cc9f222e95cd0133e3ed3d8912079cbe1bcb",
+      "rows": 7067
+    },
+    {
+      "file": "conduit-sep11-sep15.csv",
+      "url": "https://drive.google.com/file/d/1XQo9JstB_RzGi40MByI88TLQNQHqXV4Q/view",
+      "sha256": "1082cdbe145167a63a49ff74dd037662d4dd94e9e4d78ed8da19455744200e30",
+      "rows": 7062
+    }
+  ],
+  "notes": [
+    "Official hackathon GeoCSV exports from the JKUAT Conduit platform resource folder. Attribution: 3d-fewsnet.icdp.ucar.edu; DOI https://doi.org/10.5065/d6v1236q. No license is assumed; confirm redistribution and commercial-use terms with the data owner.",
+    "Actual timestamps determine coverage. The file named conduit-aug28-sep03.csv ends on September 1 UTC, not September 3.",
+    "Air temperature and relative humidity use SHT Temperature and SHT Humidity. The export metadata unit row labels humidity as degC; this inconsistency is recorded rather than silently propagated. Named humidity values are interpreted as percent, constrained to 0–100.",
+    "Rain uses incremental Rain Gauge 1 (mm), summed after deduplication. Daily and prior-day cumulative counters are not summed. Gauge 2 is zero throughout these exports and is not used as corroboration.",
+    "Every non-zero station Health value is excluded from favourable-weather evidence because the bit-mask was not supplied. Positive rainfall still triggers protection.",
+    "Hourly eligibility requires at least 45 complete observations, 75% distinct minute coverage, and no gap of 15 minutes or more, including hour edges. Missing rain is never converted to zero.",
+    "All calendar days and hours are Africa/Nairobi (EAT, UTC+03:00). Stored timestamps are UTC. No interpolation crosses missing intervals.",
+    "0 conflicting duplicate timestamps were withheld. Raw-row flag counts (before overlap removal): {\"station_health_flag\":58}.",
+    "Historical replay is retrospective and uses observed weather from the whole selected day. It does not estimate prediction accuracy, grain moisture, aflatoxin risk or achieved savings."
+  ],
+  "bytes": 2219755,
+  "hours": {
+    "total": 480,
+    "dry": 83,
+    "cover": 206,
+    "marginal": 22,
+    "unknown": 169
+  },
+  "byDay": [
+    {
+      "date": "2026-08-28",
+      "observations": 1239,
+      "dryHours": 8,
+      "usableDaytimeHours": 9,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-08-29",
+      "observations": 1417,
+      "dryHours": 8,
+      "usableDaytimeHours": 9,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-08-30",
+      "observations": 1402,
+      "dryHours": 8,
+      "usableDaytimeHours": 9,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-08-31",
+      "observations": 1415,
+      "dryHours": 6,
+      "usableDaytimeHours": 9,
+      "rainMm": 0.4
+    },
+    {
+      "date": "2026-09-01",
+      "observations": 1410,
+      "dryHours": 7,
+      "usableDaytimeHours": 9,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-09-02",
+      "observations": 1416,
+      "dryHours": 7,
+      "usableDaytimeHours": 9,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-09-03",
+      "observations": 1415,
+      "dryHours": 6,
+      "usableDaytimeHours": 9,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-09-04",
+      "observations": 1414,
+      "dryHours": 6,
+      "usableDaytimeHours": 9,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-09-05",
+      "observations": 174,
+      "dryHours": 0,
+      "usableDaytimeHours": 0,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-09-06",
+      "observations": 0,
+      "dryHours": 0,
+      "usableDaytimeHours": 0,
+      "rainMm": null
+    },
+    {
+      "date": "2026-09-07",
+      "observations": 0,
+      "dryHours": 0,
+      "usableDaytimeHours": 0,
+      "rainMm": null
+    },
+    {
+      "date": "2026-09-08",
+      "observations": 0,
+      "dryHours": 0,
+      "usableDaytimeHours": 0,
+      "rainMm": null
+    },
+    {
+      "date": "2026-09-09",
+      "observations": 0,
+      "dryHours": 0,
+      "usableDaytimeHours": 0,
+      "rainMm": null
+    },
+    {
+      "date": "2026-09-10",
+      "observations": 0,
+      "dryHours": 0,
+      "usableDaytimeHours": 0,
+      "rainMm": null
+    },
+    {
+      "date": "2026-09-11",
+      "observations": 1232,
+      "dryHours": 7,
+      "usableDaytimeHours": 9,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-09-12",
+      "observations": 1414,
+      "dryHours": 6,
+      "usableDaytimeHours": 9,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-09-13",
+      "observations": 1413,
+      "dryHours": 7,
+      "usableDaytimeHours": 9,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-09-14",
+      "observations": 1414,
+      "dryHours": 7,
+      "usableDaytimeHours": 9,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-09-15",
+      "observations": 1412,
+      "dryHours": 0,
+      "usableDaytimeHours": 9,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-09-16",
+      "observations": 177,
+      "dryHours": 0,
+      "usableDaytimeHours": 0,
+      "rainMm": 0
+    }
+  ]
+}

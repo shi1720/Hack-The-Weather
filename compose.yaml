@@ -1,0 +1,26 @@
+services:
+  kavu:
+    build: .
+    restart: unless-stopped
+    init: true
+    ports:
+      - "127.0.0.1:3001:3001"
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 3001
+      APP_ORIGIN: ${APP_ORIGIN:?Set APP_ORIGIN to your public HTTPS origin}
+      DATABASE_PATH: /app/var/kavu.db
+      WEATHER_USER_AGENT: ${WEATHER_USER_AGENT:-Kavu/1.0 https://github.com/shi1720/Hack-The-Weather}
+      TRUST_PROXY_HOPS: 1
+    volumes:
+      - kavu-data:/app/var
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+volumes:
+  kavu-data:

@@ -1,0 +1,6 @@
+node_modules
+dist
+public/data
+data
+output
+package-lock.json
