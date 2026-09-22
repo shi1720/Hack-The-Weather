@@ -29,7 +29,7 @@ jobs:
         run: |
           docker build -t kavu:ci .
           docker run -d --name kavu-ci --read-only --tmpfs /tmp -v kavu-ci-data:/app/var -e APP_ORIGIN=https://kavu.example.test -p 127.0.0.1:3002:3001 kavu:ci
-          curl --retry 5 --retry-delay 2 --retry-connrefused --fail http://127.0.0.1:3002/api/health
+          curl --retry 10 --retry-delay 1 --retry-all-errors --max-time 3 --fail http://127.0.0.1:3002/api/health || { docker logs kavu-ci; exit 1; }
           docker rm -f kavu-ci
       - uses: actions/upload-artifact@v4
         if: failure()
@@ -60,6 +60,14 @@ jobs:
         env:
           VITE_DEMO_ONLY: 'true'
           VITE_BASE_PATH: /Hack-The-Weather/
+      - run: npx playwright install --with-deps chromium
+      - name: Verify public demo works offline
+        run: |
+          VITE_BASE_PATH=/Hack-The-Weather/ npx vite preview --host 127.0.0.1 --port 4173 &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          curl --retry 10 --retry-delay 1 --retry-all-errors --max-time 3 --fail http://127.0.0.1:4173/Hack-The-Weather/ > /dev/null
+          npm run test:static
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
