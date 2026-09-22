@@ -36,6 +36,7 @@ The implementation owner reports **103 passing unit/API tests and five passing C
 - [Editable eight-slide pitch](../../output/kavu-pitch.pptx): rendered and visually checked.
 - [Four-page business and technical brief](../../output/pdf/kavu-brief.pdf): rendered and visually checked.
 - [Silent screen demonstration](../../output/kavu-demo-silent.mp4): exactly 4:25, 1920×1080 H.264, visually checked and prepared for the human voice track and member appearances. Follow the [recording instructions](recording-notes.md). It is not yet the final rule-compliant uploaded video.
+- [Supplementary server account recording](../../output/kavu-accounts-silent.mp4): one minute of actual local registration, empty-workspace intake, logout/login and persisted batch. It is separate from the primary submission video; [capture notes](account-recording-notes.md).
 - Public repository, source/data provenance, reproducible tests, deployment instructions, pilot guide and Devpost copy are supplied. The final video URL, actual team identities and final submission require people.
 
 ## Recording contract

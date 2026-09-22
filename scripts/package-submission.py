@@ -1,15 +1,17 @@
-"""Bundle the reviewable entry materials; source code remains in the public repository."""
+"""Bundle tracked source, reproducible data and entry materials; exclude local state."""
 from pathlib import Path
+from subprocess import check_output
 from zipfile import ZipFile, ZIP_DEFLATED
 
 root = Path(__file__).resolve().parents[1]
 target = root / 'output' / 'kavu-submission-kit.zip'
-files = [root / name for name in ['README.md', 'LICENSE', 'THIRD_PARTY.md']]
-files += sorted((root / 'docs').rglob('*.md'))
-files += [root / 'output' / name for name in [
-    'kavu-pitch.pptx', 'pdf/kavu-brief.pdf', 'kavu-demo-silent.mp4', 'demo-cues.srt',
-    'screenshots/overview-slide.png', 'screenshots/welcome.png',
-]]
+tracked = check_output(['git', 'ls-files', '-z'], cwd=root).decode().split('\0')
+files = sorted(root / name for name in tracked if name)
+required = ['output/kavu-pitch.pptx', 'output/pdf/kavu-brief.pdf',
+            'output/kavu-demo-silent.mp4', 'output/kavu-accounts-silent.mp4']
+for name in required:
+    if root / name not in files:
+        raise RuntimeError(f'Add the final artifact to Git before packaging: {name}')
 for path in files:
     if not path.is_file():
         raise FileNotFoundError(path)

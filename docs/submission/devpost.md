@@ -8,7 +8,7 @@ Kavu
 
 ## Short description
 
-A drying operations desk that turns JKUAT Conduit weather data into maize-yard tasks, measured moisture records and transparent drying-cost comparisons.
+Turn JKUAT Conduit weather into maize-drying jobs, measured moisture records and transparent cost comparisons.
 
 ## One-line pitch
 
@@ -100,7 +100,7 @@ OpenAI Codex assisted with research, software implementation, test development a
 - [Official hackathon data resources](https://hack-the-weather.devpost.com/resources)
 - [KALRO maize post-harvest guidance](https://keep.kalro.org/appfiles/media/vc_files/maize-tot.pdf)
 - [NCPB drying service and reference tariff](https://ncpb.co.ke/drying/)
-- [Repository evidence and market memo](../research/market-and-evidence.md)
+- [Repository evidence and market memo](https://github.com/shi1720/Hack-The-Weather/blob/main/docs/research/market-and-evidence.md)
 
 ## Project links and final video
 

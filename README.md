@@ -5,7 +5,7 @@
 
 **The drying operations desk for maize cooperatives.**
 
-[Explore the public demo](https://shi1720.github.io/Hack-The-Weather/) · [Pitch deck](output/kavu-pitch.pptx) · [Project brief](output/pdf/kavu-brief.pdf) · [Video script](docs/submission/video-script.md)
+[Explore the public demo](https://shi1720.github.io/Hack-The-Weather/) · [Download the complete kit](https://github.com/shi1720/Hack-The-Weather/releases/download/v1.0.0/kavu-submission-kit.zip) · [Pitch deck](output/kavu-pitch.pptx) · [Project brief](output/pdf/kavu-brief.pdf) · [Video script](docs/submission/video-script.md)
 
 Built for **Hack the Weather 2026**, using real **JKUAT Conduit@Empathy** observations.
 
@@ -166,6 +166,7 @@ Production customer rollout still requires an actual hosting account, TLS/domain
 - [Recording instructions: add narration and real team appearances](docs/submission/recording-notes.md)
 - [Ready-to-paste Devpost copy](docs/submission/devpost.md)
 - [Judge Q&A / founder cheat sheet](docs/submission/judge-qa.md)
+- [One-minute server account walkthrough](output/kavu-accounts-silent.mp4) — actual local registration, login and persisted batch; [capture notes](docs/submission/account-recording-notes.md)
 - [Human handoff checklist](docs/submission/human-handoff.md)
 - [Internal judging review](docs/review/judge-review.md)
 
