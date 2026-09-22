@@ -34,7 +34,7 @@ export default function Batches({
           'Measured moisture %',
           'Target %',
           'Status',
-          'Deadline UTC',
+          'Needed by (EAT calendar date)',
         ],
         ...shown.map((b) => [
           b.name,
@@ -56,9 +56,14 @@ export default function Batches({
         text="Measured at intake. Tracked through every drying decision."
         actions={
           <>
-            <Button secondary onClick={exportCsv}>
+            <Button
+              secondary
+              onClick={exportCsv}
+              disabled={!shown.length}
+              title="Export the batches matching your current filters"
+            >
               <Download size={16} />
-              Export
+              Export CSV
             </Button>
             <Button onClick={onAdd}>
               <Plus size={17} />
@@ -71,7 +76,12 @@ export default function Batches({
         <div className="table-toolbar">
           <div className="filter-tabs">
             {['all', 'queued', 'drying', 'covered', 'ready', 'dispatched'].map((s) => (
-              <button key={s} onClick={() => setFilter(s)} className={filter === s ? 'active' : ''}>
+              <button
+                key={s}
+                onClick={() => setFilter(s)}
+                aria-pressed={filter === s}
+                className={filter === s ? 'active' : ''}
+              >
                 {s === 'all' ? 'All batches' : s}
                 <span>{w.batches.filter((b) => s === 'all' || b.status === s).length}</span>
               </button>
@@ -87,8 +97,13 @@ export default function Batches({
             />
           </label>
         </div>
+        {shown.length > 0 && (
+          <p className="table-scroll-hint">
+            Scroll sideways for moisture, status and batch actions.
+          </p>
+        )}
         {shown.length ? (
-          <div className="table-scroll">
+          <div className="table-scroll" role="region" aria-label="Batch register" tabIndex={0}>
             <table className="batch-table">
               <thead>
                 <tr>
@@ -161,15 +176,30 @@ export default function Batches({
             </table>
           </div>
         ) : (
-          <Empty
-            title={
-              w.batches.length ? 'No batches match your search.' : 'Your first batch starts here.'
-            }
-          >
-            {w.batches.length
-              ? 'Try another name or status.'
-              : 'Add a maize batch with its weight and measured moisture.'}
-          </Empty>
+          <div>
+            <Empty
+              title={
+                w.batches.length ? 'No batches match your search.' : 'Your first batch starts here.'
+              }
+            >
+              {w.batches.length
+                ? 'Try another name or status.'
+                : 'Add a maize batch with its weight and measured moisture.'}
+            </Empty>
+            {w.batches.length > 0 && (
+              <div className="empty-action">
+                <Button
+                  secondary
+                  onClick={() => {
+                    setQuery('');
+                    setFilter('all');
+                  }}
+                >
+                  Clear filters
+                </Button>
+              </div>
+            )}
+          </div>
         )}
       </section>
       <div className="callout-row">

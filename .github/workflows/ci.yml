@@ -21,6 +21,14 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm test
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify durable Firestore adapter without cloud credentials
+        run: npm exec --yes --package=firebase-tools@15.30.2 -- firebase emulators:exec --only firestore --project demo-kavu-ci --config firebase.emulator.json 'npx vitest run tests/firestore-store.test.ts'
+        env:
+          FIRESTORE_TEST_PROJECT: demo-kavu-ci
       - run: npm run evaluate
       - run: npm audit --omit=dev --audit-level=moderate
       - run: npx playwright install --with-deps chromium

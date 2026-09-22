@@ -1,0 +1,8 @@
+*.pdf binary
+*.pptx binary
+*.png binary
+*.jpg binary
+*.mp4 binary
+*.webm binary
+*.zip binary
+data/raw/** -text

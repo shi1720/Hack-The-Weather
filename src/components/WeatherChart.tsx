@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ShieldCheck, Sun, CloudSun, CircleHelp } from 'lucide-react';
 import type { WeatherHour } from '../shared/types';
 import { time } from '../lib/format';
@@ -14,6 +15,14 @@ export default function WeatherChart({
   hours: WeatherHour[];
   compact?: boolean;
 }) {
+  const [selectedAt, setSelectedAt] = useState<string | null>(null);
+  const selected = hours.find((hour) => hour.timestamp === selectedAt);
+  const verdictLabels = {
+    dry: 'Drying window',
+    marginal: 'Marginal',
+    cover: 'Keep covered',
+    unknown: 'No data',
+  };
   const shown = hours.filter((h) => {
     const hr = +time(h.timestamp).slice(0, 2);
     return hr >= 6 && hr <= 19;
@@ -89,9 +98,13 @@ export default function WeatherChart({
       </div>
       <div className="hour-grid" style={{ gridTemplateColumns: `repeat(${shown.length}, 1fr)` }}>
         {shown.map((h) => (
-          <div
+          <button
+            type="button"
             key={h.timestamp}
             className={`hour-cell ${h.verdict}`}
+            aria-label={`${time(h.timestamp)} EAT: ${verdictLabels[h.verdict]}. View weather evidence`}
+            aria-pressed={selectedAt === h.timestamp}
+            onClick={() => setSelectedAt(selectedAt === h.timestamp ? null : h.timestamp)}
             title={`${time(h.timestamp)} EAT: ${h.reasons.join('; ')}. ${h.temperatureC?.toFixed(1) ?? 'Unknown'}°C, ${h.humidityPct?.toFixed(0) ?? 'Unknown'}% RH`}
           >
             <span>{time(h.timestamp).slice(0, 2)}</span>
@@ -106,9 +119,28 @@ export default function WeatherChart({
             )}
             <b>{h.temperatureC?.toFixed(0) ?? '–'}°</b>
             <i style={{ background: colors[h.verdict] }} />
-          </div>
+          </button>
         ))}
       </div>
+      <p className="chart-help">Select an hour to see the conditions behind its recommendation.</p>
+      {selected && (
+        <div className="hour-evidence" role="status">
+          <strong>
+            {time(selected.timestamp)} EAT · {verdictLabels[selected.verdict]}
+          </strong>
+          <p>{selected.reasons.join(' ')}</p>
+          <span>
+            {selected.temperatureC === null
+              ? 'Temperature unavailable'
+              : `${selected.temperatureC.toFixed(1)}°C`}{' '}
+            ·{' '}
+            {selected.humidityPct === null
+              ? 'Humidity unavailable'
+              : `${selected.humidityPct.toFixed(0)}% humidity`}{' '}
+            · {selected.rainMm === null ? 'Rain unavailable' : `${selected.rainMm} mm rain`}
+          </span>
+        </div>
+      )}
       <div className="chart-legend">
         <span>
           <i style={{ background: colors.dry }} />

@@ -20,8 +20,10 @@ export default function Yard({
   onSelect,
   toast,
   onMeasure,
+  isDemo,
 }: {
   workspace: Workspace;
+  isDemo: boolean;
   plan: Plan;
   onPlan: () => void;
   send: (c: WorkspaceCommand) => Promise<void>;
@@ -46,7 +48,7 @@ export default function Yard({
         .filter((t) => t.status === 'pending')
         .map(
           (t) =>
-            `${time(t.dueAt)} ${language === 'sw' ? sw[t.action] : t.title} — ${w.batches.find((b) => b.id === t.batchId)?.name ?? 'Batch'}`,
+            `${time(t.dueAt)} ${language === 'sw' ? sw[t.action] : t.title} · ${w.batches.find((b) => b.id === t.batchId)?.name ?? 'Batch'}`,
         )
         .join('\n') +
       (language === 'sw'
@@ -112,10 +114,18 @@ export default function Yard({
           <p>Copy a short brief into your team’s existing chat, or print it for the yard.</p>
           <div className="language-toggle">
             <Languages size={17} />
-            <button className={language === 'en' ? 'active' : ''} onClick={() => setLanguage('en')}>
+            <button
+              aria-pressed={language === 'en'}
+              className={language === 'en' ? 'active' : ''}
+              onClick={() => setLanguage('en')}
+            >
               English
             </button>
-            <button className={language === 'sw' ? 'active' : ''} onClick={() => setLanguage('sw')}>
+            <button
+              aria-pressed={language === 'sw'}
+              className={language === 'sw' ? 'active' : ''}
+              onClick={() => setLanguage('sw')}
+            >
               Kiswahili
             </button>
           </div>
@@ -126,12 +136,16 @@ export default function Yard({
               .slice(0, 3)
               .map((t) => (
                 <p key={t.id}>
-                  {time(t.dueAt)} — {language === 'sw' ? sw[t.action] : t.title}
+                  {time(t.dueAt)} · {language === 'sw' ? sw[t.action] : t.title}
                   <span>{w.batches.find((b) => b.id === t.batchId)?.name}</span>
                 </p>
               ))}
             {!dayTasks.some((t) => t.status === 'pending') && (
-              <p>Build a plan to prepare the operator brief.</p>
+              <p>
+                {dayTasks.length
+                  ? 'All jobs in this plan are complete.'
+                  : 'Build a plan to prepare the operator brief.'}
+              </p>
             )}
           </div>
           <Button secondary onClick={copy} disabled={!dayTasks.some((t) => t.status === 'pending')}>
@@ -159,6 +173,8 @@ export default function Yard({
           <div className="task-list">
             {tasks.map((t) => {
               const b = w.batches.find((b) => b.id === t.batchId);
+              const replayOnly =
+                !isDemo && p.mode === 'replay' && ['spread', 'turn'].includes(t.action);
               return (
                 <div className={`task-row ${t.status === 'done' ? 'complete' : ''}`} key={t.id}>
                   <span className={`task-symbol ${t.action}`}>
@@ -169,6 +185,11 @@ export default function Yard({
                       {t.title} <span>{b?.name}</span>
                     </h3>
                     <p>{t.reason}</p>
+                    {replayOnly && (
+                      <p className="task-boundary">
+                        Review only. Use a current forecast plan to record outdoor work.
+                      </p>
+                    )}
                   </div>
                   <div className="task-due">
                     <strong>{time(t.dueAt)}</strong>
@@ -177,7 +198,7 @@ export default function Yard({
                   <Button
                     secondary
                     className="task-complete"
-                    disabled={t.status === 'done' || !!saving}
+                    disabled={t.status === 'done' || !!saving || replayOnly}
                     busy={saving === t.id}
                     onClick={async () => {
                       if (t.action === 'measure' && b) {
@@ -197,13 +218,15 @@ export default function Yard({
                     <Check size={16} />
                     {t.status === 'done'
                       ? 'Done'
-                      : t.action === 'measure'
-                        ? 'Log reading'
-                        : t.action === 'cover'
-                          ? 'Confirm yard cleared'
-                          : t.action === 'dryer'
-                            ? 'Confirm referral'
-                            : 'Complete'}
+                      : replayOnly
+                        ? 'Replay only'
+                        : t.action === 'measure'
+                          ? 'Log reading'
+                          : t.action === 'cover'
+                            ? 'Confirm yard cleared'
+                            : t.action === 'dryer'
+                              ? 'Confirm referral'
+                              : 'Complete'}
                   </Button>
                 </div>
               );
@@ -211,7 +234,9 @@ export default function Yard({
           </div>
         ) : (
           <Empty title="No open jobs.">
-            Build an operator plan to turn the weather window into a coordinated day.
+            {dayTasks.length
+              ? 'All jobs in this plan are complete. Turn on Show completed to review the record.'
+              : 'Build an operator plan to turn the weather window into a coordinated day.'}
           </Empty>
         )}
       </section>

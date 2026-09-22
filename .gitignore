@@ -12,3 +12,8 @@ test-results/
 .DS_Store
 output/build/
 output/kavu-submission-kit.zip
+output/kavu-submission.zip
+.firebase/
+firebase-debug.log
+*.log
+output/screenshots/audit-*

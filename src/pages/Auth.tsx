@@ -3,7 +3,7 @@ import { ArrowRight, ShieldCheck, ArrowUpRight, Sun, Wind, CloudRain, Check } fr
 import { Logo, Button, ErrorNotice } from '../components/UI';
 import * as api from '../lib/api';
 import type { User } from '../shared/types';
-export default function Auth({ onLogin }: { onLogin: (u: User) => void }) {
+export default function Auth({ onLogin, notice }: { onLogin: (u: User) => void; notice?: string }) {
   const [mode, setMode] = useState<'login' | 'register'>('login'),
     [busy, setBusy] = useState(''),
     [error, setError] = useState('');
@@ -97,10 +97,15 @@ export default function Auth({ onLogin }: { onLogin: (u: User) => void }) {
                 : 'A better day starts here.'}
           </h2>
           <p className="auth-description">
-            Plan the yard. Protect the grain.
+            For maize cooperatives deciding what to dry, cover, or send to a dryer.
             <br />
-            Know what changed, batch by batch.
+            Turn local weather into work your team can verify.
           </p>
+          {notice && (
+            <div className="auth-session-notice" role="status">
+              {notice}
+            </div>
+          )}
           {error && <ErrorNotice message={error} />}
           <Button className="demo-button" onClick={demo} busy={busy === 'demo'} disabled={!!busy}>
             Explore demo workspace <ArrowRight size={18} />
@@ -126,6 +131,12 @@ export default function Auth({ onLogin }: { onLogin: (u: User) => void }) {
                   or {mode === 'login' ? 'sign in to your cooperative' : 'create your workspace'}
                 </span>
               </div>
+              {mode === 'register' && (
+                <p className="register-note">
+                  Start with an empty private workspace. Add your yard capacity and first measured
+                  batch when you are ready.
+                </p>
+              )}
               <form onSubmit={submit} className="form-stack">
                 {mode === 'register' && (
                   <label>
@@ -172,6 +183,7 @@ export default function Auth({ onLogin }: { onLogin: (u: User) => void }) {
               <p className="switch-auth">
                 {mode === 'login' ? 'New to Kavu?' : 'Already have a workspace?'}{' '}
                 <button
+                  disabled={!!busy}
                   onClick={() => {
                     setMode(mode === 'login' ? 'register' : 'login');
                     setError('');

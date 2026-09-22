@@ -1,0 +1,10 @@
+{
+  "indexes": [],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "kavu_workspaces",
+      "fieldPath": "payload",
+      "indexes": []
+    }
+  ]
+}

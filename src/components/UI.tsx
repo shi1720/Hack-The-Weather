@@ -26,6 +26,7 @@ export function Button({
       {...props}
       className={`${secondary ? 'button secondary' : 'button'} ${props.className || ''}`}
       disabled={busy || props.disabled}
+      aria-busy={busy || undefined}
     >
       {busy ? <LoaderCircle className="spin" size={16} /> : null}
       {children}
@@ -134,11 +135,19 @@ export function Modal({
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const previous = document.activeElement as HTMLElement | null;
+    const background = [...document.querySelectorAll<HTMLElement>('.main-shell, .sidebar')].map(
+      (element) => ({ element, wasInert: element.inert }),
+    );
+    background.forEach(({ element }) => {
+      element.inert = true;
+    });
     const node = ref.current;
     const focusable = () =>
-      node?.querySelectorAll<HTMLElement>(
-        'button:not(:disabled), input, select, textarea, a[href]',
-      );
+      [
+        ...(node?.querySelectorAll<HTMLElement>(
+          'button:not(:disabled), input:not(:disabled):not([type=hidden]), select:not(:disabled), textarea:not(:disabled), a[href], [tabindex="0"]',
+        ) ?? []),
+      ].filter((element) => element.getClientRects().length > 0);
     focusable()?.[0]?.focus();
     const handler = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -162,9 +171,12 @@ export function Modal({
     return () => {
       document.removeEventListener('keydown', handler);
       document.body.style.overflow = old;
+      background.forEach(({ element, wasInert }) => {
+        element.inert = wasInert;
+      });
       previous?.focus();
     };
-  }, [onClose]);
+  }, [onClose, title]);
   return (
     <div
       className="modal-backdrop"

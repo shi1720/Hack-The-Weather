@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import fs from 'node:fs/promises';
 
 async function demo(page: import('@playwright/test').Page) {
   await page.goto('/');
@@ -46,7 +47,15 @@ test('real Conduit replay changes decisions and supports the complete operator w
   await expect(page.locator('.stat').nth(2)).toContainText('Tariff-equivalent reduction');
   const download = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Export evidence' }).click();
-  expect((await download).suggestedFilename()).toBe('kavu-impact-ledger.csv');
+  const evidenceFile = await download;
+  expect(evidenceFile.suggestedFilename()).toBe('kavu-impact-ledger.csv');
+  const exported = await fs.readFile((await evidenceFile.path())!, 'utf8');
+  expect(exported).toContain(
+    '"Configured tariff KES per tonne per moisture percentage point","377.8"',
+  );
+  expect(exported).toContain('"Measured at UTC"');
+  expect(exported).toContain('Demo only: meter 02; three representative samples.');
+  expect(exported).toContain('"Export generated at UTC"');
   await page.reload();
   await expect(page.getByRole('heading', { name: 'Evidence, one batch at a time.' })).toBeVisible();
   expect(errors).toEqual([]);
@@ -87,10 +96,20 @@ test('registration, batch intake, logout and login persist private records', asy
   await page.getByLabel('New password', { exact: true }).fill('Changed test password 456!');
   await page.getByLabel('Confirm new password', { exact: true }).fill('Changed test password 456!');
   await page.getByRole('button', { name: 'Change password', exact: true }).click();
+  await expect(page.getByRole('status')).toContainText(
+    'Password changed. Sign in with your new password.',
+  );
   await page.getByLabel('Email address').fill(email);
   await page.getByLabel('Password', { exact: true }).fill('Changed test password 456!');
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Test maize E-05' })).toBeVisible();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByRole('button', { name: 'Open navigation' }).click();
+  await page.getByRole('button', { name: 'Account settings' }).click();
+  await expect(page.getByRole('dialog', { name: 'Account settings' })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('.sidebar')).toHaveAttribute('inert', '');
+  await expect(page.getByRole('button', { name: 'Open navigation' })).toBeFocused();
 });
 
 test('mobile navigation, data evidence and constrained planning remain usable', async ({
@@ -120,6 +139,7 @@ test('welcome and overview have no serious automated accessibility violations', 
   page,
 }) => {
   await page.goto('/');
+  await expect(page.getByRole('button', { name: /Explore demo workspace/ })).toBeVisible();
   const welcome = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
     .analyze();
@@ -136,6 +156,29 @@ test('welcome and overview have no serious automated accessibility violations', 
       .filter((v) => ['critical', 'serious'].includes(v.impact ?? ''))
       .map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),
   ).toEqual([]);
+});
+
+test('the loading screen remains readable while a cloud session check is pending', async ({
+  page,
+}) => {
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route('**/api/auth/me', async (route) => {
+    await held;
+    await route.fulfill({ json: { user: null } });
+  });
+  await page.goto('/');
+  await expect(page.getByRole('status')).toHaveText('Opening the drying desk…');
+  const audit = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+    .analyze();
+  release();
+  expect(audit.violations.filter((v) => ['critical', 'serious'].includes(v.impact ?? ''))).toEqual(
+    [],
+  );
+  await expect(page.getByRole('button', { name: /Explore demo workspace/ })).toBeVisible();
 });
 
 test('handover includes only the selected plan and missing rainfall stays unknown', async ({

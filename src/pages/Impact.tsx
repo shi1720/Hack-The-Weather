@@ -2,7 +2,8 @@ import { Download, Scale, Droplets, ClipboardCheck, Info, Sprout } from 'lucide-
 import { Badge, Button, Empty, PageTitle, PanelTitle, Stat, SourceLink } from '../components/UI';
 import type { Workspace } from '../shared/types';
 import { dryingCost } from '../shared/engine';
-import { csv, day, download, number, time } from '../lib/format';
+import { day, download, number, time } from '../lib/format';
+import { evidenceCsv } from '../lib/evidence';
 export default function Impact({
   workspace: w,
   isDemo,
@@ -24,42 +25,7 @@ export default function Impact({
     0,
   );
   function exportLedger() {
-    download(
-      'kavu-impact-ledger.csv',
-      csv([
-        ['KAVU evidence ledger', isDemo ? 'DEMONSTRATION WORKSPACE' : 'USER-REPORTED OBSERVATIONS'],
-        ['Method', 'Tariff equivalent is not realised savings. No causal attribution.'],
-        [
-          'Batch',
-          'Weight kg',
-          'Intake moisture %',
-          'Latest measured moisture %',
-          'Target moisture %',
-          'Readings',
-          'Tariff-equivalent reduction KES',
-        ],
-        ...w.batches.map((b) => [
-          b.name,
-          b.weightKg,
-          b.initialMoisturePct,
-          b.moisturePct,
-          b.targetMoisturePct,
-          b.measurements.length,
-          Math.max(
-            0,
-            dryingCost(
-              b.weightKg,
-              b.initialMoisturePct,
-              b.targetMoisturePct,
-              w.settings.dryerRateKes,
-            ) - dryingCost(b.weightKg, b.moisturePct, b.targetMoisturePct, w.settings.dryerRateKes),
-          ),
-        ]),
-        [],
-        ['Audit timestamp UTC', 'Action', 'Detail'],
-        ...w.audit.map((a) => [a.at, a.action, a.detail]),
-      ]),
-    );
+    download('kavu-impact-ledger.csv', evidenceCsv(w, isDemo));
   }
   return (
     <>

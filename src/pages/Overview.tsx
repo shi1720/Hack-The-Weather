@@ -24,6 +24,8 @@ export default function Overview({
   onAdd,
   navigate,
   busy,
+  isDemo,
+  onReplay,
 }: {
   workspace: Workspace;
   plan: Plan;
@@ -32,9 +34,13 @@ export default function Overview({
   onAdd: () => void;
   navigate: (s: string) => void;
   busy: boolean;
+  isDemo: boolean;
+  onReplay: (date: string) => void;
 }) {
-  const active = w.batches.filter((b) => b.status !== 'dispatched'),
-    pending = w.tasks.filter((t) => t.status === 'pending');
+  const active = w.batches.filter((b) => !['ready', 'dispatched'].includes(b.status)),
+    pending = w.tasks.filter(
+      (t) => t.status === 'pending' && t.id.startsWith(`plan:${p.mode}:${p.date}:`),
+    );
   const hours = p.hours.filter(
     (h) =>
       Number(time(h.timestamp).slice(0, 2)) >= 8 && Number(time(h.timestamp).slice(0, 2)) <= 17,
@@ -57,12 +63,77 @@ export default function Overview({
           <h1>Make every dry hour count.</h1>
           <p>Local weather, a coordinated yard, and a record for every batch.</p>
         </div>
-        <Button onClick={onPlan} busy={busy}>
+        <Button onClick={w.batches.length ? onPlan : onAdd} busy={busy}>
           <CalendarDays size={17} />
-          Build operator plan
+          {w.batches.length ? 'Build operator plan' : 'Add your first batch'}
           <ArrowRight size={16} />
         </Button>
       </div>
+      {isDemo && (
+        <details className="journey-guide">
+          <summary>
+            <span className="journey-number">3</span>
+            <span>
+              <strong>Explore the complete workflow</strong>
+              <small>Real Conduit weather. Sample cooperative records.</small>
+            </span>
+            <ArrowRight size={17} />
+          </summary>
+          <div className="journey-steps">
+            <div>
+              <span>01 · COMPARE THE WEATHER</span>
+              <p>See how the plan responds to a dry day, a humid day, and a genuine station gap.</p>
+              <div className="example-days">
+                {[
+                  ['2026-09-12', 'Dry day'],
+                  ['2026-09-15', 'Humid day'],
+                  ['2026-09-08', 'Missing data'],
+                ].map(([date, label]) => (
+                  <button
+                    key={date}
+                    aria-pressed={p.date === date && p.mode === 'replay'}
+                    onClick={() => onReplay(date)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <span>02 · PUT THE YARD TO WORK</span>
+              <p>Review the allocation, create operator jobs, then record the work completed.</p>
+              <button className="text-button" onClick={onPlan}>
+                Review the plan <ArrowRight size={14} />
+              </button>
+            </div>
+            <div>
+              <span>03 · CLOSE THE LOOP</span>
+              <p>
+                Log an illustrative meter reading and inspect the evidence ledger. No moisture is
+                simulated.
+              </p>
+              <button className="text-button" onClick={() => navigate('batches')}>
+                Open sample batches <ArrowRight size={14} />
+              </button>
+            </div>
+          </div>
+        </details>
+      )}
+      {!w.batches.length && (
+        <section className="onboarding-card" aria-label="Set up your workspace">
+          <div>
+            <span className="eyebrow">YOUR FIRST DAY AT THE DESK</span>
+            <h2>Start with the grain in front of you.</h2>
+            <p>
+              Set your yard capacity, add a batch with a real moisture reading, then review a
+              current weather plan.
+            </p>
+          </div>
+          <Button secondary onClick={() => navigate('data')}>
+            Set up your yard <ArrowRight size={16} />
+          </Button>
+        </section>
+      )}
       <div className="stats-grid">
         <Stat
           title={p.mode === 'forecast' ? 'Upcoming suitable hours' : 'Drying window'}
@@ -154,8 +225,8 @@ export default function Overview({
           <div className="weather-caption">
             <span className="caption-line" />
             <p>
-              Drying suitability uses measured temperature, humidity and rain. It does not predict
-              grain moisture.
+              Drying suitability uses {p.mode === 'replay' ? 'observed' : 'forecast'} temperature,
+              humidity and rain. It does not predict grain moisture.
             </p>
             <button onClick={() => navigate('data')} className="text-button">
               See the evidence <ArrowUpRight size={15} />
@@ -169,10 +240,15 @@ export default function Overview({
               <Sun size={27} />
             </div>
           </div>
-          <h2>{primary?.title ?? 'Start with your first batch.'}</h2>
+          <h2>
+            {primary?.title ??
+              (w.batches.length ? 'The active queue is clear.' : 'Start with your first batch.')}
+          </h2>
           <p>
             {primary?.reason ??
-              'Add the weight, measured moisture, and deadline. Kavu will put the next drying decision in context.'}
+              (w.batches.length
+                ? 'Review ready batches before dispatch, or add the next intake when it arrives.'
+                : 'Add the weight, measured moisture, and deadline. Kavu will put the next drying decision in context.')}
           </p>
           {batch && (
             <div className="priority-batch">
@@ -200,8 +276,15 @@ export default function Overview({
                 </>
               )}
             </span>
-            <button onClick={primary ? onPlan : onAdd} disabled={busy}>
-              {primary ? 'Make it a job' : 'Add your first batch'}
+            <button
+              onClick={primary ? onPlan : w.batches.length ? () => navigate('batches') : onAdd}
+              disabled={busy}
+            >
+              {primary
+                ? 'Make it a job'
+                : w.batches.length
+                  ? 'Review batches'
+                  : 'Add your first batch'}
               <ArrowRight size={17} />
             </button>
           </div>
@@ -216,8 +299,16 @@ export default function Overview({
             All batches <ArrowUpRight size={16} />
           </button>
         </PanelTitle>
+        {p.recommendations.length > 0 && (
+          <p className="table-scroll-hint">Scroll sideways to compare every column.</p>
+        )}
         {p.recommendations.length ? (
-          <div className="table-scroll">
+          <div
+            className="table-scroll"
+            role="region"
+            aria-label="Recommended batch decisions"
+            tabIndex={0}
+          >
             <table>
               <thead>
                 <tr>
@@ -270,7 +361,9 @@ export default function Overview({
           </div>
         ) : (
           <div className="empty-row">
-            Your workspace is ready. Add a batch to build its first plan.
+            {w.batches.length
+              ? 'No batches need a drying plan. Review ready batches or add a new intake.'
+              : 'Your workspace is ready. Add a batch to build its first plan.'}
           </div>
         )}
         <div className="panel-footer">

@@ -160,7 +160,6 @@ export default function Data({
           </PanelTitle>
           <form
             className="form-stack"
-            key={w.revision}
             onSubmit={async (e) => {
               e.preventDefault();
               const f = new FormData(e.currentTarget);

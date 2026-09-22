@@ -300,6 +300,30 @@ export function applyCommand(
     let refreshed = 0;
     const desiredTaskIds = new Set<string>();
     const planPrefix = `plan:${cmd.mode}:${cmd.date}:`;
+    const batchCycles = new Map<string, number>();
+    for (const rec of plan.recommendations) {
+      const batchPrefix = `${planPrefix}${rec.batchId}:`;
+      const previous = w.tasks.flatMap((task) => {
+        if (task.batchId !== rec.batchId || !task.id.startsWith(batchPrefix)) return [];
+        const match = task.id
+          .slice(batchPrefix.length)
+          .match(/^(?:spread|turn|cover|measure|dryer|store)(?::cycle:(\d+))?$/);
+        return match ? [{ task, cycle: Number(match[1] ?? 0) }] : [];
+      });
+      let cycle = Math.max(0, ...previous.map((entry) => entry.cycle));
+      const completed = previous
+        .filter((entry) => entry.cycle === cycle && entry.task.status === 'done')
+        .map((entry) => entry.task.action);
+      // A physical return to outdoor work needs fresh companion jobs. Keep the
+      // completed cycle immutable; pending jobs make subsequent commits idempotent.
+      if (
+        (rec.action === 'spread' &&
+          completed.some((action) => ['spread', 'turn', 'cover', 'store'].includes(action))) ||
+        (rec.action === 'turn' && completed.includes('cover'))
+      )
+        cycle++;
+      batchCycles.set(rec.batchId, cycle);
+    }
     const addTask = (
       batchId: string,
       action: Workspace['tasks'][number]['action'],
@@ -307,13 +331,14 @@ export function applyCommand(
       reason: string,
       dueAt: string,
     ) => {
-      const taskId = `plan:${cmd.mode}:${cmd.date}:${batchId}:${action}`;
+      const cycle = batchCycles.get(batchId) ?? 0;
+      const taskId = `${planPrefix}${batchId}:${action}${cycle ? `:cycle:${cycle}` : ''}`;
       desiredTaskIds.add(taskId);
       const existing = w.tasks.find((t) => t.id === taskId);
       const contextLabel =
         cmd.mode === 'replay'
-          ? 'HISTORICAL REPLAY — retrospective weather; not a live operating instruction. '
-          : 'FORECAST GUIDANCE — confirm local conditions before acting. ';
+          ? 'HISTORICAL REPLAY: retrospective weather; not a live operating instruction. '
+          : 'FORECAST GUIDANCE: confirm local conditions before acting. ';
       if (action === 'dryer') title = 'Record the mechanical-dryer referral';
       if (action === 'cover') title = 'Move grain under shelter';
       const operatorConfirmation =

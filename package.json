@@ -1,6 +1,6 @@
 {
   "name": "kavu",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "description": "Weather-aware grain drying operations, built with JKUAT Conduit data.",
@@ -18,11 +18,13 @@
     "format": "prettier --write src server scripts tests",
     "evaluate": "tsx scripts/evaluate.ts",
     "backup": "tsx scripts/backup.ts",
-    "test:static": "node scripts/smoke-static.mjs"
+    "test:static": "node scripts/smoke-static.mjs",
+    "deploy:firebase": "node scripts/deploy-firebase.mjs"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.2.6",
     "@fontsource-variable/manrope": "^5.2.8",
+    "@google-cloud/firestore": "^9.2.0",
     "better-sqlite3": "^12.4.1",
     "cookie-parser": "^1.4.7",
     "express": "^5.1.0",
