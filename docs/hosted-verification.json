@@ -1,0 +1,37 @@
+{
+  "title": "Hosted API and cross-deployment persistence verification",
+  "origin": "https://kavu-drying.web.app",
+  "setupAt": "2026-09-22T05:29:26.202Z",
+  "verifiedAt": "2026-09-22T05:33:58.075Z",
+  "initialVersion": "1.0.0",
+  "verifiedVersion": "2.0.0",
+  "storage": "firestore",
+  "fixtureCount": 2,
+  "workspaceRevisions": [
+    2,
+    0
+  ],
+  "checksPassed": [
+    "Secure HttpOnly SameSite=Strict __session cookies through Firebase Hosting",
+    "Private no-store cache headers on authenticated API responses",
+    "Independent accounts and tenant-owned workspace access",
+    "Foreign-tenant batch mutation rejected with HTTP 404",
+    "Foreign Origin and missing request header rejected with HTTP 403",
+    "Concurrent commands with one revision produced exactly HTTP 200 and HTTP 409",
+    "Logout revoked the old session; password login created a valid replacement",
+    "Original sessions remained valid across the application deployment",
+    "Exact workspace content digests and revisions survived unchanged"
+  ],
+  "deployment": {
+    "cloudBuild": "267fca35-e31d-4e19-afaf-015184d85227",
+    "imageTag": "release-20260922053015915",
+    "imageDigest": "sha256:cf3c591f1f793ed788986798e4dcf47e465c852847b328dd4203aded635958bd"
+  },
+  "cleanup": {
+    "complete": true,
+    "removedFixtures": 2,
+    "privateStateRemoved": true,
+    "completedAt": "2026-09-22T05:36:02.153Z"
+  },
+  "privacy": "This report contains no account identifiers, emails, passwords, cookies, access tokens or workspace contents."
+}

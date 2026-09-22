@@ -1,45 +1,37 @@
-# Human steps required for a valid final submission
+# Human steps for the final submission
 
-Software and written deliverables cannot establish personal eligibility or appear on camera in place of real teammates. These are the remaining human requirements, not a request to redo the implementation work.
+The full application and written materials are prepared. The new walkthrough uses disclosed AI narration so Shivam does not need to record a voice track unless he prefers to. Personal eligibility, real team participation and camera appearances still require the actual people involved.
 
-## Eligibility and team
+## Team and eligibility
 
-- Confirm Shivam Gupta and every teammate meet the actual rules, against the final organizer requirements. The detailed rules checked on 22 September specify ages 18–35 and explicitly allow non-students, while the overview says students only. This is a published conflict, not a confirmed eligibility finding.
-- Form and register a real team of **2–5 eligible people**. Do not count an AI assistant as a teammate or invent a participant.
-- Confirm each person's name, approved public identity and actual contribution. Add those details to Devpost and the README accurately.
-- Confirm the organizer's eligibility interpretation before submission if the overview/rules conflict affects the team. A proposed business model does not establish or remove eligibility.
+- Register a real team of **2 to 5 eligible people**, with accurate names and contributions. An AI assistant is a development tool, not a registered teammate.
+- Check the eligibility wording against the team's circumstances. The detailed rules specify ages 18 to 35 and allow non-students; the overview says students only. Resolve any conflict that affects participation before submission.
+- Credit completed work accurately. Shivam Gupta supplied product direction, commercial priorities, quality expectations and constraints. Add later human engineering, review or research contributions only after they happen.
 
-No claim that these checks are satisfied should be made until the people involved confirm it. [Official participation rules](https://hack-the-weather.devpost.com/rules)
+[Official rules](https://hack-the-weather.devpost.com/rules)
 
-## Record the final video
+## Final video appearance requirement
 
-- Use the prepared [verbatim script and shot list](video-script.md) alongside the actual [4:25 silent screen recording](../../output/kavu-demo-silent.mp4). Follow the [three finishing steps and exact timings](recording-notes.md). The application clicks, example entries and explanatory cards are already recorded; this asset still needs real narration and member appearances.
-- Shivam records the narration. Every actual team member must appear visibly in the finished video; the rules allow screen recording with voice-over but also require member appearances.
-- Include the historical-replay label and distinguish demonstration lot inputs from real field measurements.
-- Keep the finished video between **3 and 5 minutes**, with readable screens and clear audio.
-- Add actual human contributions only. Do not claim farmer interviews, field trials or review work that did not occur.
+The prepared stock AI narrator supplies clear audio without imitating Shivam. Actual team members still need to appear in the official submission video. Add real camera footage at the opening or closing, or as a small overlay that leaves the application readable. Keep the full edit between 3 and 5 minutes.
 
-## Upload and submit
+The narrated application capture, captions and publishing details are tracked in [YouTube copy](youtube.md). The [locked script](narration-v2.md) describes the real hosted account path and one complete example lot. An earlier silent recording and human script remain available as alternatives.
 
-- Upload the finished video to an accessible host. Test its link while signed out; judges must not need a paid account or special access.
-- Add the verified [public repository](https://github.com/shi1720/Hack-The-Weather), [live browser sandbox](https://shi1720.github.io/Hack-The-Weather/) and final video links to the Devpost entry. Use the prepared [Devpost copy](devpost.md), with the actual team information.
-- Read the final entry, confirm required fields and submit through the team's Devpost account before the deadline.
-- Keep the video and repository available through judging, and be ready to explain the implementation using the [judge Q&A](judge-qa.md).
+## Submission
 
-The directly checked deadline is **26 September 2026, 02:15 IST**, equivalent to **25 September 2026, 23:45 EAT**. Recheck the [official overview](https://hack-the-weather.devpost.com/) on submission day. Do not rely on the older 21 September date in search snippets.
+Use the prepared [Devpost description](devpost-v2.md), [additional information answers](additional-info.md), [testing instructions](testing-instructions.md) and final public video link. The user has authorized submission now and intends to add a teammate later. Record submission only after the Devpost UI confirms it. Add the real eligible teammate details and the required actual member appearances before the editing deadline. Keep roles and contributions accurate.
 
-## Authorship wording
-
-**Known contribution:** Shivam Gupta — founder and product lead; product direction, commercial emphasis, quality expectations and project constraints.
-
-**AI disclosure:** OpenAI Codex assisted with research, implementation, test development and documentation.
-
-**Add later, only if completed:** human code changes, testing, review, customer research, design changes and teammate contributions. The team remains responsible for understanding the project.
+The deadline is **26 September 2026 at 02:15 IST**, or **25 September at 23:45 EAT**. Recheck the [event page](https://hack-the-weather.devpost.com/) on submission day. Keep the repository, app and video accessible during judging.
 
 ## What is already supplied
 
-The repository is public and the browser sandbox is live. The application, source-data pipeline, tests, deployment guidance, editable slide deck, PDF brief, silent demonstration and written submission materials are supplied. The implementation owner reports 103 passing unit/API tests, five passing browser tests, a passing Docker smoke in GitHub CI and a passing signed-out offline smoke against the public sandbox. Current evidence is recorded in [the control sheet](README.md).
+The [public full app](https://kavu-drying.web.app/) runs on Firebase Hosting, a Cloud Run API and Firestore. Hosted signup, logout, login, password changes and record persistence have passed. The [repository](https://github.com/shi1720/Hack-The-Weather) includes source, real Conduit exports, reproducible tests, deployment guidance and a SQLite local option.
 
-The public sandbox is a browser-local demonstration: example data stay in that browser, and it offers no private server account or live forecast. The separate authenticated server and Docker setup are available for self-hosting; a permanent public full-stack host has not been provisioned. The software is prepared for supervised evaluation, with no claimed customer traction, field-validated drying policy or proven production reliability.
+The refreshed pitch deck, four-page brief, project images, exact submission copy and narration are available in [the control sheet](README.md). The 4:25 narrated video and its captions are complete. The [public YouTube walkthrough](https://www.youtube.com/watch?v=iyu0CjoYOgM) is verified at 1080p with English CC. Devpost project details are saved, and the remaining additional-information attachment is being completed with the final archives. Check [the publication record](youtube.md) before attaching it.
 
-The remaining personal actions are real eligible team registration, real voices and camera appearances, the final video upload, and the team's Devpost submission. Public launch verification and the documented software checks are complete.
+Customer interviews, pilot partners, paying customers and measured field impact remain future work. The build is ready for supervised evaluation, with stated operating assumptions and source limits.
+
+## Authorship and narration disclosure
+
+**Shivam Gupta: founder and product lead.** Product direction, commercial focus, quality requirements and constraints.
+
+**AI assistance:** Codex assisted research, software engineering, test development and documentation. The walkthrough uses a disclosed stock AI voice generated with OpenAI, not Shivam's recorded or cloned voice. The team remains responsible for understanding and explaining the project.

@@ -1,56 +1,63 @@
-# Submission pack: editorial control sheet
+# Kavu submission pack
 
-This is the delivery and claim register for Kavu, reconciled on **22 September 2026**. It separates implemented software from external launch and human submission requirements. The software is prepared for a supervised pilot; field effectiveness and production operations have not been validated.
+The full app is live at **[kavu-drying.web.app](https://kavu-drying.web.app/)**. Firebase Hosting serves the interface, Cloud Run runs the API and Firestore preserves private accounts and workspaces. Hosted signup, sign-out, sign-in and password changes have passed. SQLite remains available for local self-hosting.
 
-## Files
+## Copy for Devpost and YouTube
 
-- [Devpost copy](devpost.md): public description, project fields and AI disclosure.
-- [Verbatim video script](video-script.md): approximately 4:25 of narration with a separate shot list.
-- [Judge Q&A](judge-qa.md): product, technical, evidence and business answers.
-- [Pilot interview guide](pilot-interview-guide.md): future research, with no fabricated participants or findings.
-- [Human handoff](human-handoff.md): eligibility, teammate and final video/submission requirements.
-- [Source decision memo](../research/market-and-evidence.md): exact sources, commercial assumptions and claim boundaries.
+- [Seven required Devpost fields](devpost-v2.md)
+- [Additional information answers and file upload](additional-info.md)
+- [Judge testing instructions](testing-instructions.md)
+- [YouTube title, description and publication record](youtube.md)
+- [Locked narrated script](narration-v2.md) and [machine-readable segments](narration-v2.json)
+- [Human handoff](human-handoff.md)
+- [Judge Q&A](judge-qa.md), [internal judging review](../review/judging-v2.md) and [separate final review](../review/independent-final-review.md)
+- [Pilot interview guide](pilot-interview-guide.md) and [market evidence memo](../research/market-and-evidence.md)
 
-## Build-claim reconciliation
+## Generated assets
 
-The implementation owner reports **103 passing unit/API tests and five passing Chromium browser tests**, plus passing local and public-sandbox offline smoke tests at this checkpoint. [GitHub Actions run 35688453407](https://github.com/shi1720/Hack-The-Weather/actions/runs/35688453407) passed verification and publication, including a production Docker smoke. This editorial pass inspected the source, regression tests and browser run status; it did not independently rerun every suite. CI remains the reproducible check for the submitted commit.
+- [Public narrated walkthrough](https://www.youtube.com/watch?v=iyu0CjoYOgM), exactly 4:25 at 1080p with English CC; [local MP4](../../output/kavu-demo-narrated.mp4), [66-cue captions](../../output/kavu-demo-narrated.srt) and [recording verification](narrated-recording-notes.md)
+- [Editable pitch deck](../../output/kavu-pitch.pptx), eight slides
+- [Buyer and judge brief](../../output/pdf/kavu-brief.pdf), four pages
+- [YouTube thumbnail](../../output/kavu-youtube-thumbnail.png), 1280 x 720
+- [Devpost project image](../../output/kavu-devpost-thumbnail.png), 1200 x 800
+- [Overview gallery image](../../output/gallery/kavu-overview.png), [batch register](../../output/gallery/kavu-batches.png) and [mobile interface](../../output/gallery/kavu-mobile.png)
 
-| Claim in the copy | Evidence and bounded status |
-|---|---|
-| Isolated demonstration | Browser suite covers entry and the lot workflow. Static sandbox persists its example workspace locally; it does not create a server account. |
-| Real accounts and private workspaces | Local HTTP/API tests cover ownership and sessions; browser suite covers registration, sign-out, sign-in, persisted data and Account settings password change. No permanent public full-stack host is provisioned. |
-| Historical Conduit replay | Original files, hashes and preparation pipeline produce 18,364 unique observations after removing 2,825 overlaps. [Controlled evaluation](../evaluation.md) verifies the September 12/15/gap contrast; retrospective observations are not forecast validation. |
-| Capacity-aware plan | Shared engine/reducer tests cover whole-batch allocation and occupied space. September 12 allocates 2,700 kg under the 3,000 kg example capacity. |
-| Operator tasks and handovers | Browser suite covers create/complete/reload and date-scoped copied briefs. Reducer regression rejects stale dryer referrals and preserves physical state on a normal referral. One supervisor owns the workspace; no per-operator accounts or assignments are claimed. |
-| Moisture-based storage review | Shared tests require a recent at-target recorded measurement; no task completion or weather score certifies grain quality. |
-| Transparent ledger | Inspected formula compares intake and current moisture gaps to the target, using the recorded intake mass; it does not accumulate every downward step. Unit tests cover tariff units, invalid inputs and monotonicity. Values are reference-tariff equivalents, not attributable savings. |
-| Data-quality gates | Tests cover missing, invalid and stale evidence. Gap-day rainfall is visibly unknown; Gauge 2 is excluded. |
-| Downloads | Browser suite exercises CSV export; audit history is present in the workspace. Reconcile any exported customer data before external use. |
-| Self-hosting | GitHub CI passed a production Docker build, non-root/read-only container startup and health check. Configuration, backup and recovery guidance are supplied. This is not evidence of a permanent hosted service or a tested customer recovery procedure. |
-| Offline static sandbox | Built-site smoke passed locally: cached data, offline reload, missing-data gating, plan creation, spread completion and persistence, with no API calls or page errors. [Smoke script](../../scripts/smoke-static.mjs). First successful online load is required. |
-| Public repository | [GitHub repository](https://github.com/shi1720/Hack-The-Weather) confirmed public. |
-| Public sandbox launch | [GitHub Pages sandbox](https://shi1720.github.io/Hack-The-Weather/) is live. The implementation owner ran the signed-out Playwright smoke against this exact URL: real data, missing-day gating, offline reload, plan/job completion and persisted state passed, with no API calls or page errors. |
+The verified [Devpost upload](../../output/kavu-submission.zip) is approximately 2.02 MB and contains generated artifacts, final captions, submission materials and the frozen source. Video is excluded to stay within the 35 MB limit. The [full kit](../../output/kavu-submission-kit.zip), approximately 18.4 MB, also includes the narrated MP4. Both archives passed integrity and exclusion checks.
 
-## Prepared artifacts
+The completed narrated video uses a disclosed stock AI voice. Its ten segments preserve the 500-word script, with 66 timed caption cues. The 1080p MP4 is exactly 265.000 seconds and 10,842,049 bytes. Public YouTube playback, 1080p HD and native English captions are verified. The earlier [silent demonstration](../../output/kavu-demo-silent.mp4) and [human recording instructions](recording-notes.md) remain available as alternate editing assets.
 
-- [Editable eight-slide pitch](../../output/kavu-pitch.pptx): rendered and visually checked.
-- [Four-page business and technical brief](../../output/pdf/kavu-brief.pdf): rendered and visually checked.
-- [Silent screen demonstration](../../output/kavu-demo-silent.mp4): exactly 4:25, 1920×1080 H.264, visually checked and prepared for the human voice track and member appearances. Follow the [recording instructions](recording-notes.md). It is not yet the final rule-compliant uploaded video.
-- [Supplementary server account recording](../../output/kavu-accounts-silent.mp4): one minute of actual local registration, empty-workspace intake, logout/login and persisted batch. It is separate from the primary submission video; [capture notes](account-recording-notes.md).
-- Public repository, source/data provenance, reproducible tests, deployment instructions, pilot guide and Devpost copy are supplied. The final video URL, actual team identities and final submission require people.
+## Evidence and release checks
 
-## Recording contract
+| Capability | Evidence and scope |
+| --- | --- |
+| Public full app | Hosted route verified at [kavu-drying.web.app](https://kavu-drying.web.app/) with real private-account persistence in Firestore. |
+| Account lifecycle | Hosted browser checks cover signup, sign-out, sign-in, password change and retained records. The workspace currently has one account owner. |
+| Conduit input | 18,364 unique observations after 2,825 overlapping rows are removed. Source hashes and provenance remain available. |
+| Operational effect | The [controlled evaluation](../evaluation.md) allocates 2,700 kg under September 12 conditions and zero under humid/missing evidence, with the same operational inputs. |
+| Data quality | Missing rainfall stays unknown. The primary rain gauge supports the policy, and Gauge 2 is excluded. Historical replay stays identified as retrospective. |
+| Physical workflow | Capacity limits, occupancy, task completion and measured moisture operate through shared rules. Repeat drying cycles after confirmed shelter receive fresh jobs while preserving completed history. Recommitting the same plan is idempotent. |
+| Tariff accounting and export | The ledger compares intake and latest target gaps using intake mass. CSV exports now include rate, units, formula, generated UTC time, workspace revision, stable IDs, all retained measurements and notes, tasks and audit records. The value remains a reference cost, separate from actual savings. |
+| Default software suite | Latest implementation-owner run: **112 tests passed**, with **six opt-in Firestore checks skipped** in that default run. It includes four new repeat-cycle regressions and two export regressions. |
+| Cloud and hosted checks | The earlier dedicated real-Firestore run passed **eight checks**, including two codec checks that overlap the default suite. The final deployed version 2.0.0, revision `kavu-api-00003-4pb`, passed **all 17 hosted browser tests**, including downloaded CSV metadata after the late cycle/export fixes. Do not add these overlapping counts. |
+| Separate review | A review agent that did not implement this release independently reproduced the cycle issue, inspected both fixes and passed **30 focused workspace/export tests**. This is an internal project review, not an organizer or field assessment. |
+| Dependency check | Production dependency audit reports zero known vulnerabilities at the checked release point. This is not an external security audit. |
+| Static fallback | The separate [GitHub Pages sandbox](https://shi1720.github.io/Hack-The-Weather/) retains its verified offline workflow after an initial successful load. Its records stay in the browser. |
+| Self-hosting | Express/SQLite and Docker setup remain supplied. Prior GitHub CI verified a non-root, read-only container startup and health response. Cloud production operations still require ongoing monitoring and support. |
 
-Use **the historical replay dated 12 September 2026** for the main story. State “historical replay” out loud and keep its label in frame. The full-day retrospective weather is not a forecast that was available to an operator at the time.
+Test counts and results refer to their actual run scope. Core source `26a9688` is frozen and its GitHub CI passed, including Firestore emulator coverage, the Docker smoke and the offline static preview. Final cloud revision verification is complete. Public video, final documentation and both archive integrity checks are complete. The internal document review does not substitute for those executable checks or a field pilot.
 
-Use the seeded **Mavuno A-01** lot: **1,800 kg**, initial **18.2%**. The primary recording logs **15.0%**, giving **KSh 2,176.128**, rounded to **KSh 2,176**, using **KSh 377.80 / tonne / percentage point**. Show this ledger before a later **12.7%** reading demonstrates the moisture target. All lot readings in the demo are illustrative inputs. The separate 5-tonne, two-point, KSh 3,778 example in the deck and commercial copy is theoretical; it must not be shown as the live result of Mavuno's workflow. A 5-tonne lot exceeds the default 3-tonne yard and therefore cannot be used for the narrated spread task. The video also contrasts the September 8 data gap and September 15 humid replay before returning to September 12.
+## One example across every medium
 
-The application uses the lot's recorded intake mass and its moisture baseline. Repeated measurements must not create a second equivalent for the same reduction. Do not describe this ledger as verified operational savings.
+Use the seeded **Mavuno A-01**, **1,800 kg**, starting at **18.2%**. A demonstration reading of **15.0%** gives `1.8 x 3.2 x 377.80 = KSh 2,176.128`, displayed rounded to **KSh 2,176**. Show that result before entering **12.7%**, which changes the ledger and permits a separate storage-readiness review.
 
-## Publication boundaries
+The updated deck, brief and narration use this same example. The Conduit weather is real. Lot identities and readings illustrate the workflow. A measured moisture target does not establish representative sampling, food safety or aflatoxin status.
 
-- The public sandbox is verified. Publish the final accessible narrated video URL; do not paste a pending video label into a Devpost URL field.
-- Do not label the application production-proven. It can be deployment-ready software while field validation remains outstanding.
-- Do not replace a missing teammate with an AI name, a fictional role or an eligibility assertion.
-- Product direction and constraints were supplied by Shivam Gupta. Implementation, research, test authoring and documentation are AI-assisted. Add later human review or engineering contributions only after they happen.
-- The official submission deadline is **26 September 2026, 02:15 IST** / **25 September 2026, 23:45 EAT**. Recheck the [official page](https://hack-the-weather.devpost.com/) before final submission.
+## Devpost progress
+
+Project details are saved at step 3 of 5. The verified preview renders the seven requested headings, 12 technology tags, three gallery images, two try-it links and the correct public video. Shivam's contribution text is saved with accurate scope. Additional-information answers are filled, with the ZIP attachment and save still pending. These saved details are not a claim that final submission or eligibility is complete.
+
+## Human completion requirements
+
+The team still needs real eligible participants, accurate contributions, actual member appearances in the official video and final Devpost submission. A disclosed AI narrator can supply the audio but cannot appear as a human teammate. See the [handoff](human-handoff.md).
+
+The deadline is **26 September 2026, 02:15 IST**, equivalent to **25 September 2026, 23:45 EAT**. [Official event page](https://hack-the-weather.devpost.com/)

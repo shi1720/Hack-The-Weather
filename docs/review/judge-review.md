@@ -1,5 +1,7 @@
 # Skeptical judge and product QA review
 
+**Earlier checkpoint:** this document preserves the initial review and its first closure. The newer [version 2 review](judging-v2.md) tracks the live Firebase Hosting, Cloud Run and Firestore release at [kavu-drying.web.app](https://kavu-drying.web.app/). Statements below about an unprovisioned public backend describe the earlier checkpoint.
+
 **Review date:** 22 September 2026. **Scope:** current application, server, decision engine, source data, evaluation, submission copy and local browser experience. The README, pitch assets and public deployment were still being finalized during this review. This is an internal adversarial review, not an organizer's assessment or a prediction of ranking. The reviewing agent previously contributed the data/decision engine, so this is a separate critical review pass, not an externally independent audit.
 
 **Verdict:** Kavu is a coherent working product demonstration with a specific operator and a real decision pipeline. It has substantially stronger engineering and evidence discipline than a weather chart with an AI narrative. The current weakness is proof of operational and commercial value: the proposed buyer has not been interviewed, the rules have not been calibrated against grain outcomes, and the public preview does not demonstrate the full server deployment. Several small handover and presentation defects can undermine the otherwise credible story and should be fixed before recording.
@@ -95,7 +97,7 @@ The detailed rules require a real 2–5-person team, an accessible 3–5 minute 
 
 No public URL, final video, team composition, customer, field trial or production reliability should be marked verified solely because a document describes it. Update the submission control sheet from actual final evidence and retain the bounded test/evaluation claims above.
 
-## Final closure addendum — 22 September 2026
+## Final closure addendum :  22 September 2026
 
 This addendum reconciles the review with the delivered build. It preserves the scores and findings above as the earlier checkpoint; it does not inflate the score after fixes or pretend to be a new independent evaluation. The editorial reviewer inspected the changed source, regression tests, browser run status and submission materials. Final suite, Docker and public-site results below were reported by the implementation owner; the editorial reviewer did not rerun those complete suites.
 

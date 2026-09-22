@@ -1,6 +1,6 @@
 """Create Kavu's four-page buyer/judge brief with embedded fonts and source links."""
 from pathlib import Path
-import sys, json
+import sys, json, os
 ROOT=Path.cwd(); BUILD=ROOT/'output/build/deck'; sys.path.insert(0,str(BUILD/'python'))
 from fontTools.ttLib import TTFont as Font
 from fontTools.varLib.instancer import instantiateVariableFont
@@ -23,6 +23,7 @@ W,H=595.276,841.89
 FOREST='#244D37'; IVORY='#F8F9F5'; GOLD='#D0A650'; INK='#26392D'; MUTED='#667561'; LIGHT='#DEE5D9'
 out=ROOT/'output/pdf/kavu-brief.pdf';out.parent.mkdir(parents=True,exist_ok=True)
 c=canvas.Canvas(str(out),pagesize=(W,H));c.setTitle('Kavu - buyer and judge brief');c.setAuthor('Shivam Gupta; AI-assisted preparation with OpenAI Codex');c.setSubject('Maize drying operations using JKUAT Conduit observations')
+RELEASE_VERIFIED=os.environ.get('KAVU_CLOUD_VERIFIED')=='true'
 q=json.loads((ROOT/'data/processed/quality-report.json').read_text())
 def bg(color):c.setFillColor(HexColor(color));c.rect(0,0,W,H,fill=1,stroke=0)
 def txt(s,x,y,size=12,color=INK,font='Body'):
@@ -43,14 +44,14 @@ bg(IVORY);txt('BUYER AND JUDGE BRIEF',44,789,9,MUTED,'BodyBold')
 txt('kavu.',42,700,68,FOREST,'Display')
 para('Every dry hour counts.',45,657,500,28,FOREST,36,'Display')
 para('A drying operations desk for maize cooperatives',45,607,495,15,MUTED,22)
-para('A weather reading does not cover a pile of maize. A person does.',45,545,494,18,FOREST,25,'Display')
-para('Kavu connects station evidence to the next yard job, records the work, and asks for a new moisture measurement. The supervisor can explain the decision and its result lot by lot.',45,480,490,11.4,INK,17)
-shot=BUILD/'overview-focus.png'
+para('A harvest takes months. At the drying yard, the next few hours matter.',45,545,494,18,FOREST,25,'Display')
+para('Kavu helps a supervisor allocate limited drying space, record completed work and take the next moisture reading. Each lot keeps the decision and its result together.',45,480,490,11.4,INK,17)
+shot=BUILD/'overview-release.png'
 if not shot.exists():shot=ROOT/'output/screenshots/overview.png'
 image=ImageReader(str(shot));iw,ih=image.getSize(); scale=min(507/iw,286/ih);dh=ih*scale;dw=iw*scale
 c.drawImage(image,44+(507-dw)/2,104+(286-dh)/2,width=dw,height=dh,mask='auto')
 para('Actual application screen. Historical Conduit replay with demonstration lots.',45,94,498,8.5,MUTED,12)
-txt('Shivam Gupta',45,63,10,FOREST,'BodyBold');txt('Founder and product lead',45,47,9,MUTED);footer(1);c.showPage()
+txt('Shivam Gupta',45,63,10,FOREST,'BodyBold');txt('Founder and product lead',45,47,9,MUTED);txt('kavu-drying.web.app',350,57,11,FOREST,'BodyBold');footer(1);c.showPage()
 
 # Page 2: actual evidence and architecture.
 bg(IVORY);title('Data and the decision','Evidence and implementation')
@@ -62,27 +63,27 @@ steps=[
  ('1','Original Conduit exports','GeoCSV files retain source attribution and checksums. The pipeline deduplicates timestamps and inspects available inputs.'),
  ('2','Evidence gates','Missing intervals remain missing. Humidity interpretation, rain counters and station health receive explicit handling. Operating thresholds need local validation.'),
  ('3','Shared decision logic','Environmental conditions, batch metadata and yard capacity produce an explained plan. An operator commits and completes tasks.'),
- ('4','Accounts and persistence','React and TypeScript use an Express API with SQLite for private server workspaces. A separate static demo stores example records in the browser.'),
+ ('4','Cloud accounts and a local option','Firebase Hosting serves React. Cloud Run runs the API with durable Firestore records. Express and SQLite remain available for local self-hosting.'),
  ('5','New measurement and record','Recent measured moisture determines eligibility for storage review. Task completion alone cannot certify grain quality or aflatoxin status.')]
 y=447
 for num,head,body in steps:
  txt(num,46,y-19,21,GOLD,'Display');txt(head,79,y-10,12.5,FOREST,'BodyBold');para(body,79,y-23,466,10.1,INK,14.6);y-=75
-para('Method limit: the historical plan uses observed weather from the selected day. It cannot establish forecast accuracy, causal savings or a grain-drying rate.',45,66,505,8.4,MUTED,11.6)
+para(('Cloud release verified at kavu-drying.web.app. ' if RELEASE_VERIFIED else 'Cloud release awaiting final hosted verification. ')+'The historical plan uses observed weather retrospectively. It demonstrates the workflow and does not estimate forecast accuracy or drying rates.',45,70,505,8.4,MUTED,11.6)
 footer(2);c.showPage()
 
 # Page 3: transparent commercial case.
 bg(IVORY);title('A business worth testing','Economics and buyer')
-txt('KSh 3,778',43,626,48,FOREST,'Display')
+txt('KSh 2,176',43,626,48,FOREST,'Display')
 txt('Drying-tariff equivalent of the example reduction',47,594,12.5,FOREST,'BodyBold')
-para('5 tonnes x 2 percentage points x KSh 377.80',46,565,505,16,INK,22)
-para('Example input: measured moisture moves from 17% to 15%. This uses NCPB\'s published tonne tariff. Its separately rounded bag tariff produces a slightly different number. Kavu uses the tonne basis consistently.',46,526,502,10.6,MUTED,15)
-para('The comparison excludes labour, transport and handling costs. It does not establish money saved or what would have happened without Kavu.',46,462,502,11,FOREST,16,'BodyBold')
+para('1.8 tonnes x 3.2 percentage points x KSh 377.80',46,565,505,16,INK,22)
+para('Mavuno A-01 is an example 1,800 kg lot. A reading from 18.2% to 15.0% gives KSh 2,176.128, displayed rounded. The comparison uses NCPB\'s published tonne tariff and the intake-to-current moisture gap.',46,526,502,10.6,MUTED,15)
+para('A transparent reference comparison. Measuring actual savings requires labour, transport, handling and alternative drying costs.',46,462,502,11,FOREST,16,'BodyBold')
 line(412)
 para('Prospective buyer',46,386,238,16,FOREST,22,'Display')
 para('A cooperative or aggregator that already dries maize and uses a moisture meter. One supervisor coordinates many farmers\' lots. The existing alternative is a weather report plus a notebook.',46,352,238,10.8,INK,16)
 para('Price hypothesis',331,386,218,16,FOREST,22,'Display')
 txt('KSh 2,500',330,330,29,FOREST,'Display')
-para('per active month per site.<br/>No paying customers or signed pilots claimed.',332,310,216,10.8,INK,16)
+para('per active month per site.<br/>Test support effort, daily use and willingness to renew.',332,310,216,10.8,INK,16)
 line(247)
 para('Illustrative operating assumptions',46,226,507,15,FOREST,21,'Display')
 rows=[('Revenue per site per active month','KSh 2,500'),('Infrastructure allocation at 20 sites','KSh 150'),('Support and operating allowance','KSh 350'),('Contribution before sales, onboarding and founder pay','KSh 2,000')]
@@ -94,12 +95,12 @@ footer(3);c.showPage()
 
 # Page 4: pilot and sources, with working links.
 bg(IVORY);title('Pilot, limits and sources','Next step')
-para('A supervised pilot with three maize yards',46,649,505,21,FOREST,28,'Display')
+para('A supervised pilot with up to three maize yards',46,649,505,21,FOREST,28,'Display')
 items=[('Observe current work','Document handling, representative sampling, handovers and actual receipts before changing the process.'),('Run in shadow mode','Compare suggestions with experienced operators. Record disagreements and retain existing protective practices.'),('Test continued use','Measure adoption, rechecks, administrative time and actual costs. Ask whether a buyer will renew at an agreed price.')]
 y=603
 for i,(head,body) in enumerate(items,1):
  txt(f'0{i}',46,y-17,17,GOLD,'Display');txt(head,83,y-10,12,FOREST,'BodyBold');para(body,83,y-24,466,10.4,INK,14.7);y-=73
-para('No pilot partner is committed. Initial lot histories test usability, not causal impact. Expansion needs relevant station coverage, local validation and confirmed data rights.',46,374,505,10.1,FOREST,14.5)
+para('Proposed research, with partner recruitment still to come. Initial histories test daily usefulness. Expansion depends on relevant weather coverage, local validation and confirmed data rights.',46,374,505,10.1,FOREST,14.5)
 line(320);txt('Sources and traceability',46,294,16,FOREST,'Display')
 sources=[
  ('1. Conduit observations and source files','https://drive.google.com/drive/folders/1KDoCh8vss7nv_B6SuVBlQQssjSh1yaBg','Official hackathon folder. Attribute 3d-fewsnet.icdp.ucar.edu, instrument 61. Confirm redistribution and commercial rights with the owner.'),

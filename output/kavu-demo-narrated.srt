@@ -1,0 +1,276 @@
+1
+00:00:01,000 --> 00:00:02,540
+A harvest takes months.
+
+2
+00:00:03,120 --> 00:00:05,540
+At the drying yard, the next few hours matter.
+
+3
+00:00:06,080 --> 00:00:07,860
+A supervisor has several maize lots,
+
+4
+00:00:08,340 --> 00:00:10,200
+limited space, and people to coordinate.
+
+5
+00:00:10,920 --> 00:00:13,220
+Kavu turns weather evidence into the next job,
+
+6
+00:00:13,640 --> 00:00:15,000
+then records what changed.
+
+7
+00:00:19,000 --> 00:00:21,380
+Start by creating a private account.
+
+8
+00:00:22,098 --> 00:00:24,916
+Add a sample batch, with its weight and measured moisture.
+
+9
+00:00:31,707 --> 00:00:35,306
+Sign out, then sign back in: the record is still here.
+
+10
+00:00:35,780 --> 00:00:37,940
+That is the foundation for daily use,
+
+11
+00:00:38,341 --> 00:00:41,184
+a supervisor can return to the same yard history.
+
+12
+00:00:44,951 --> 00:00:49,258
+Now open the separate demonstration workspace to follow a
+complete example.
+
+13
+00:00:53,810 --> 00:00:58,360
+Kavu uses eighteen thousand, three hundred and sixty-four unique
+observations from
+
+14
+00:00:58,360 --> 00:01:02,960
+JKUAT Conduit. Temperature, humidity and the primary
+
+15
+00:01:02,960 --> 00:01:05,660
+rain gauge inform explainable drying rules.
+
+16
+00:01:06,480 --> 00:01:08,980
+Source files and timestamps stay traceable.
+
+17
+00:01:09,060 --> 00:01:13,160
+The banner identifies this as a historical replay, so the example
+can be repeated
+
+18
+00:01:13,160 --> 00:01:14,460
+with the same evidence.
+
+19
+00:01:18,000 --> 00:01:22,000
+On September eighth, the export has a gap, so outdoor work is
+withheld.
+
+20
+00:01:25,600 --> 00:01:27,680
+September fifteenth has usable observations,
+
+21
+00:01:28,080 --> 00:01:30,380
+but humid conditions change the advice.
+
+22
+00:01:32,120 --> 00:01:35,140
+September twelfth provides six suitable historical hours.
+
+23
+00:01:35,600 --> 00:01:40,020
+The same operator can see why a plan changes, and whether the
+issue is the weather or
+
+24
+00:01:40,020 --> 00:01:40,600
+the evidence.
+
+25
+00:01:42,000 --> 00:01:46,300
+Follow Mavuno A-zero-one, a sample lot of eighteen hundred
+kilograms
+
+26
+00:01:46,300 --> 00:01:48,600
+at eighteen point two percent moisture.
+
+27
+00:01:49,440 --> 00:01:50,720
+Build the operator plan.
+
+28
+00:01:51,500 --> 00:01:54,940
+Kavu allocates twenty-seven hundred kilograms within a three-
+tonne yard,
+
+29
+00:01:55,760 --> 00:01:58,020
+prioritizes the lots, and explains each action.
+
+30
+00:01:58,480 --> 00:02:01,860
+The supervisor turns that plan into a concrete list of jobs.
+
+31
+00:02:08,000 --> 00:02:09,260
+In the drying yard,
+
+32
+00:02:09,620 --> 00:02:12,260
+record Mavuno being spread, then turned.
+
+33
+00:02:12,740 --> 00:02:15,140
+The completed jobs stay attached to the batch.
+
+34
+00:02:15,700 --> 00:02:18,240
+A date-specific brief supports the next handover.
+
+35
+00:02:18,700 --> 00:02:21,400
+The next useful question is what a moisture meter says,
+
+36
+00:02:21,920 --> 00:02:24,360
+so the workflow leads directly to a fresh reading.
+
+37
+00:02:30,000 --> 00:02:33,340
+Enter an illustrative reading of fifteen percent.
+
+38
+00:02:33,340 --> 00:02:37,627
+The impact ledger now shows about two thousand, one hundred and
+
+39
+00:02:37,627 --> 00:02:40,680
+seventy-six Kenyan shillings of drying-tariff equivalent.
+
+40
+00:02:41,000 --> 00:02:43,280
+That uses one point eight tonnes,
+
+41
+00:02:43,900 --> 00:02:46,000
+a three point two percentage-point reduction,
+
+42
+00:02:46,560 --> 00:02:48,460
+and NCPB's published tariff.
+
+43
+00:02:48,780 --> 00:02:51,220
+It is a transparent reference comparison.
+
+44
+00:02:52,040 --> 00:02:54,180
+Actual savings would require measured labour,
+
+45
+00:02:54,840 --> 00:02:56,640
+transport and alternative drying costs.
+
+46
+00:03:00,000 --> 00:03:04,140
+A separate example reading of twelve point seven percent meets
+the configured
+
+47
+00:03:04,140 --> 00:03:08,460
+moisture target. Confirm storage readiness and the batch history
+records
+
+48
+00:03:08,460 --> 00:03:12,960
+the decision. Representative sampling and local quality
+procedures remain
+
+49
+00:03:12,960 --> 00:03:16,660
+essential. This moisture check supports storage review;
+
+50
+00:03:17,300 --> 00:03:20,580
+food safety and aflatoxin testing are separate requirements.
+
+51
+00:03:25,000 --> 00:03:29,040
+The prospective buyer is a cooperative or aggregation yard.
+
+52
+00:03:29,640 --> 00:03:32,280
+One supervisor coordinates many farmers' lots.
+
+53
+00:03:32,980 --> 00:03:37,560
+The starting price hypothesis is twenty-five hundred shillings
+per active month
+
+54
+00:03:37,560 --> 00:03:41,120
+per site. A supervised pilot will test it:
+
+55
+00:03:41,700 --> 00:03:45,920
+observe current work, compare recommendations alongside the
+operator, then measure
+
+56
+00:03:45,920 --> 00:03:47,960
+handover time, moisture checks,
+
+57
+00:03:48,340 --> 00:03:50,500
+actual costs and willingness to renew.
+
+58
+00:03:53,000 --> 00:03:55,540
+React and TypeScript power the interface.
+
+59
+00:03:55,980 --> 00:03:59,360
+A server API and cloud storage preserve private workspaces.
+
+60
+00:03:59,820 --> 00:04:02,520
+The shared rules make each recommendation inspectable.
+
+61
+00:04:03,020 --> 00:04:06,180
+Shivam Gupta led product direction and commercial priorities;
+
+62
+00:04:06,680 --> 00:04:08,920
+Codex assisted engineering and documentation.
+
+63
+00:04:09,500 --> 00:04:11,840
+This walkthrough uses an AI-generated narrator.
+
+64
+00:04:12,360 --> 00:04:14,940
+The next milestone is supervised field evidence.
+
+65
+00:04:15,720 --> 00:04:19,200
+Kavu connects Conduit data to completed work and a new
+measurement.
+
+66
+00:04:19,640 --> 00:04:21,100
+Every dry hour counts.

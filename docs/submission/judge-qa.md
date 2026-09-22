@@ -50,7 +50,7 @@ Show the actual provenance panel and one recommendation whose reasons refer to u
 
 ### Are you forecasting rain?
 
-“An observation is not a forecast. The replay uses historical environmental evidence. The self-hosted server has a separate optional MET Norway forecast adapter with source attribution, issue time and freshness gates. It is not available in the public static sandbox, and stale Conduit observations do not calibrate it. We do not claim a trained rainfall-prediction model or forecast accuracy.”
+“An observation is not a forecast. The replay uses historical environmental evidence. The hosted and self-hosted server paths have a separate optional MET Norway forecast adapter with source attribution, issue time and freshness gates. It is not available in the public static sandbox, and stale Conduit observations do not calibrate it. We do not claim a trained rainfall-prediction model or forecast accuracy.”
 
 The replay uses retrospectively observed full-day weather. It demonstrates the workflow, not what could have been predicted at that time.
 
@@ -72,11 +72,11 @@ Do not recite gates that the final implementation lacks. If a raw sensor field h
 
 “A supervisor configures capacity. The proposed plan must not allocate more mass to the yard than that limit. Remaining lots stay unassigned or receive another action, with the constraint explained.”
 
-Demonstrate an overloaded yard. Know the unit used by the final product—kilograms, area, or slots—and do not interchange them. A mass capacity is a user-entered operational assumption, not a calibrated physical drying-area model.
+Demonstrate an overloaded yard. Know the unit used by the final product: kilograms, area, or slots: and do not interchange them. A mass capacity is a user-entered operational assumption, not a calibrated physical drying-area model.
 
 ### How are accounts and data protected?
 
-“The server application has private account workspaces; the browser demo is a separate local demonstration mode. We verify server-side ownership rather than relying on the interface to hide other users' records.”
+“The full app stores private accounts and workspaces in Firestore behind the server API. Hosted signup, sign-out, sign-in and password change have been checked. A separate demonstration workspace supports the example journey, and the GitHub Pages fallback keeps its examples in the browser. Server-side ownership protects each account's records.”
 
 Before using this answer, inspect the final authentication flow, password hashing, cookie settings, rate limits and cross-account tests. Do not claim external penetration testing, formal certification, encryption properties or multi-region reliability that have not been implemented and checked.
 

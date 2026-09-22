@@ -8,6 +8,7 @@ Kavu uses original application code and original product graphics (CSS/SVG) plus
 | Vite / TypeScript / tsx | Build and type system | MIT / Apache-2.0 / MIT; https://vite.dev/ and https://www.typescriptlang.org/ |
 | Express | HTTP server | MIT, https://expressjs.com/ |
 | better-sqlite3 / SQLite | Persistence | MIT / public domain, https://github.com/WiseLibs/better-sqlite3 and https://sqlite.org/ |
+| Google Cloud Firestore Node client | Durable hosted workspaces | Apache-2.0, https://github.com/googleapis/nodejs-firestore |
 | Zod | Runtime validation | MIT, https://zod.dev/ |
 | Papa Parse | GeoCSV parsing | MIT, https://www.papaparse.com/ |
 | Helmet, express-rate-limit, cookie-parser | HTTP safeguards | See individual package licences |
@@ -22,3 +23,7 @@ Kavu uses original application code and original product graphics (CSS/SVG) plus
 Conduit data was downloaded from the organizer-linked public resource folder. Its use here supports the hackathon's explicit data-use requirement. The exports carry attribution but no comprehensive redistribution/commercial-use licence text. Kavu does not claim ownership or apply MIT to this data. Confirm the applicable data permissions with the provider before a commercial rollout. No competing project's application code or transformed dataset was used. A public provenance note helped locate the original organizer folder when its URL shortener was inaccessible; all included measurements were then retrieved from the original files.
 
 Forecast data is never represented as a Conduit observation. Forecast requests go to MET Norway server-to-server with the requested approximate coordinates, following its identification/caching requirements. No third-party analytics, remote fonts, paid model inference, SMS or email delivery are required.
+
+## AI assistance and narrated media
+
+Codex assisted research, implementation, design, testing and submission materials. The product uses deterministic decision rules and makes no LLM inference calls. The final product walkthrough uses OpenAI `gpt-4o-mini-tts` with the stock `cedar` voice. Whisper transcription provides caption timing. This is disclosed AI narration, not Shivam Gupta's voice or an imitation of a real person. The API credential was used only for offline media generation and is not part of the application, repository or deployment. No third-party music is included.

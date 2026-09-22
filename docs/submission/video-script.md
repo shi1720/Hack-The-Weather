@@ -1,4 +1,6 @@
-# Kavu: verbatim demonstration script
+# Earlier human narration script
+
+For the refreshed hosted release, use [narration-v2.md](narration-v2.md). Its disclosed stock AI narrator uses third-person wording. This earlier script remains available for a human presenter and the first silent recording.
 
 **Target length:** approximately 4 minutes 25 seconds, within the required 3–5 minutes.  
 **Delivery:** calm, conversational, about 135–145 spoken words per minute.  

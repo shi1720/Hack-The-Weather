@@ -5,7 +5,7 @@
 
 **The drying operations desk for maize cooperatives.**
 
-[Explore the public demo](https://shi1720.github.io/Hack-The-Weather/) · [Download the complete kit](https://github.com/shi1720/Hack-The-Weather/releases/download/v1.0.0/kavu-submission-kit.zip) · [Pitch deck](output/kavu-pitch.pptx) · [Project brief](output/pdf/kavu-brief.pdf) · [Video script](docs/submission/video-script.md)
+[Open Kavu](https://kavu-drying.web.app/) · [Watch the demo](https://www.youtube.com/watch?v=iyu0CjoYOgM) · [Download the complete kit](https://github.com/shi1720/Hack-The-Weather/releases/download/v2.0.0/kavu-submission-kit.zip) · [Pitch deck](output/kavu-pitch.pptx) · [Project brief](output/pdf/kavu-brief.pdf) · [Narrated demo script](docs/submission/narration-v2.md)
 
 Built for **Hack the Weather 2026**, using real **JKUAT Conduit@Empathy** observations.
 
@@ -25,7 +25,7 @@ The buyer is the cooperative or grain aggregation yard. One yard account can sup
 
 ## Try the complete journey
 
-1. Open the [public demo](https://shi1720.github.io/Hack-The-Weather/) and select **Explore demo workspace**.
+1. Open [Kavu](https://kavu-drying.web.app/) and select **Explore demo workspace**.
 2. Keep **12 September 2026** selected. Conduit records yield a six-hour suitable window; the sample plan allocates **2,700 kg** within a **3,000 kg** yard.
 3. Select **Build operator plan → Create operator jobs**. In the drying yard, confirm the spreading job for **Mavuno A-01**, then its turning job.
 4. Open **Batches → Mavuno A-01 → Log reading**. Record an example **15.0%** moisture reading with a note that it is a demo measurement.
@@ -33,14 +33,14 @@ The buyer is the cooperative or grain aggregation yard. One yard account can sup
 6. Record **12.7%**, then confirm storage readiness. The system requires a recent measured reading at or below the batch target. This is an operational check, not a food-safety certificate.
 7. Switch replay to **15 September**: the same weather rules find **zero** suitable drying hours. Switch to **8 September**: missing observations withhold an outdoor allocation. Kavu never turns a data gap into a sunny forecast.
 
-The sample cooperative, farmers, batches and moisture readings are fictional and explicitly labelled. Station observations are real. The public demo stores changes on your browser/device; **it does not pretend to provide cloud accounts**. Server mode provides genuine authentication and private persistent workspaces.
+The sample cooperative, farmers, batches and moisture readings are fictional and explicitly labelled. Station observations are real. The hosted app provides real registration, sign-in and private Firestore workspaces. Its demo creates a separate, temporary workspace. The older [GitHub Pages preview](https://shi1720.github.io/Hack-The-Weather/) is an explicitly browser-local sandbox.
 
 ## What works
 
 | Capability | Implementation |
 |---|---|
 | Real accounts | Registration, sign-in, sign-out, password change, salted scrypt password hashes, expiring hashed sessions, secure production cookies |
-| Private workspaces | SQLite persistence, authenticated ownership, atomic revision checks and conflict errors |
+| Private workspaces | Firestore cloud persistence or local SQLite, authenticated ownership, atomic revision checks and conflict errors |
 | Batch register | Intake weight/moisture/deadline, search, filters, measurement history, CSV export |
 | Weather decisions | Auditable temperature/RH/VPD/rain rules, coverage gates, contiguous daylight windows, distance/freshness limits |
 | Limited yard space | Whole-batch allocations by urgency and moisture, existing outdoor occupancy reserved until confirmed clearance |
@@ -108,14 +108,15 @@ flowchart LR
   D --> E[Operator review and jobs]
   E --> F[New meter reading and action record]
   F --> G[Tariff-equivalent ledger and export]
-  H[Authenticated workspace / SQLite] <--> I
+  H[Authenticated workspace / Firestore or SQLite] <--> I
   H <--> E
   H <--> F
 ```
 
 - **Frontend:** React 19, TypeScript, Vite, Lucide, original CSS, locally hosted DM Sans and Manrope.
 - **Server:** Node.js 22+, Express 5, Helmet, rate limits and Zod input validation.
-- **Persistence:** SQLite WAL mode via better-sqlite3; one persistent server process.
+- **Cloud:** Firebase Hosting at `kavu-drying.web.app`, an Express service on Cloud Run, and a separate Firestore database with client access denied.
+- **Persistence:** Firestore transactions and compressed workspace documents in the hosted version. SQLite WAL via better-sqlite3 remains available for local or single-node self-hosting.
 - **Decision engine:** pure TypeScript, shared by server and static demonstration; no language model needed.
 - **Verification:** Vitest unit/integration tests, actual HTTP API tests, Playwright browser journeys and axe accessibility checks.
 
@@ -147,34 +148,38 @@ npm audit              # Dependency vulnerability check
 
 ### Deploy
 
-The [deployment guide](docs/deployment.md) covers Docker/Compose, HTTPS, persistent volumes, trusted proxies, backups, session behaviour and limitations. The production server refuses a non-HTTPS public origin and uses secure cookies. Do not run its SQLite database on ephemeral serverless storage or scale multiple replicas against one file.
+The [deployment guide](docs/deployment.md) covers Firebase Hosting, Cloud Run, Firestore, Docker/Compose, trusted proxies, backups and session behaviour. The reproducible `npm run deploy:firebase` script validates and deploys only Kavu resources in the configured projects. The production server refuses a non-HTTPS public origin and uses secure cookies. Do not run its SQLite database on ephemeral serverless storage or scale multiple replicas against one file.
 
 ```sh
 APP_ORIGIN=https://your-real-domain.example docker compose up --build -d
 ```
 
-Replace that example origin with your own HTTPS hostname and configure a reverse proxy. The included GitHub workflow publishes the separate static demo. That demo is a judge-friendly sandbox, not a hosted production cooperative service.
+Replace that example origin with your own HTTPS hostname and configure a reverse proxy for the SQLite self-hosting option. The included GitHub workflow publishes a separate browser-local static preview. The Firebase site provides the complete authenticated application.
 
-Production customer rollout still requires an actual hosting account, TLS/domain setup, restore-tested backups, recovery/support/privacy procedures, data licensing confirmation and a supervised domain pilot. The repository does not claim those external operations have already happened.
+Customer rollout still requires restore-tested off-host backups, recovery/support/privacy procedures, data licensing confirmation and a supervised domain pilot. Hosting and TLS are deployed; these additional operational and field-validation steps remain explicit pilot prerequisites.
 
 ## Submission materials
 
 - [Editable pitch deck](output/kavu-pitch.pptx)
 - [Four-page product/business brief](output/pdf/kavu-brief.pdf)
-- [Verbatim 3–5 minute video script and shot list](docs/submission/video-script.md)
-- [Actual 4:25 silent screen demonstration](output/kavu-demo-silent.mp4)
-- [Recording instructions: add narration and real team appearances](docs/submission/recording-notes.md)
-- [Ready-to-paste Devpost copy](docs/submission/devpost.md)
+- [Final narration and shot list](docs/submission/narration-v2.md)
+- [Public narrated demo on YouTube](https://www.youtube.com/watch?v=iyu0CjoYOgM)
+- [Download the 4:25 narrated demonstration](output/kavu-demo-narrated.mp4) and [66-cue English captions](output/kavu-demo-narrated.srt)
+- [Recording verification and team appearance guidance](docs/submission/narrated-recording-notes.md)
+- [Final Devpost story](docs/submission/devpost-v2.md)
+- [Hosted application testing instructions](docs/submission/testing-instructions.md)
+- [YouTube title, description and publication record](docs/submission/youtube.md)
 - [Judge Q&A / founder cheat sheet](docs/submission/judge-qa.md)
-- [One-minute server account walkthrough](output/kavu-accounts-silent.mp4) — actual local registration, login and persisted batch; [capture notes](docs/submission/account-recording-notes.md)
+- [One-minute server account walkthrough](output/kavu-accounts-silent.mp4) | actual local registration, login and persisted batch; [capture notes](docs/submission/account-recording-notes.md)
 - [Human handoff checklist](docs/submission/human-handoff.md)
-- [Internal judging review](docs/review/judge-review.md)
+- [Final hosted release verification](docs/review/hosted-release-v2.md)
+- [Independent review and resolved findings](docs/review/independent-final-review.md)
 
-The video must include the actual eligible team members. A final voice/camera recording and public video URL are not fabricated or substituted by sample content.
+The video must include the actual eligible team members. The product walkthrough uses disclosed stock AI narration. Actual team appearances must be supplied by the eligible human team; AI narration cannot satisfy that requirement.
 
 ## Team and AI disclosure
 
-**Shivam Gupta — founder and product lead.** Shivam provided the problem-selection priorities, commercial requirements, product constraints and final review direction.
+**Shivam Gupta | founder and product lead.** Shivam provided the problem-selection priorities, commercial requirements, product constraints and final review direction.
 
 Codex assisted research, implementation, design, testing and submission materials. The product’s operational recommendations run on documented deterministic rules, not generative AI. Significant AI assistance is disclosed so the submission accurately represents how the work was developed. The team remains responsible for understanding, reviewing and explaining the implementation.
 
