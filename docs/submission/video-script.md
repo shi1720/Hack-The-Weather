@@ -4,7 +4,7 @@
 **Delivery:** calm, conversational, about 135–145 spoken words per minute.  
 **Presenter:** Shivam Gupta. Other eligible team members must appear visibly in the final video; do not invent names or participants.
 
-> Recording note: confirm the final feature path using [the control sheet](README.md). Spoken claims below are conditional on that verification. The script uses a historical replay and clearly identifies demonstration lot inputs. Capture the actual interface, not a nonfunctional mock-up.
+> Recording note: the actual interface journey is captured in the [prepared 4:25 silent recording](../../output/kavu-demo-silent.mp4), with verification in [the control sheet](README.md). Follow the [finishing instructions](recording-notes.md) and the matching timing table below. The script uses a historical replay and identifies demonstration lot inputs.
 
 ## Read this word for word
 
@@ -51,22 +51,25 @@ Kavu connects Conduit evidence to a completed job and a new measurement. Every d
 
 ## Timestamped shot list
 
-The timing below totals about 4 minutes 25 seconds. Adjust pauses to the recorded narration; do not accelerate interface clicks until they become unreadable.
+The timing below matches the prepared **4:25 recording**. Read naturally and use short pauses to meet the screen transitions. The spoken narration above is unchanged.
 
 | Time | Picture and actual action | Narration cue |
 |---|---|---|
-| 0:00–0:15 | Shivam on camera, Kavu wordmark. Actual eligible teammates appear in the opening or closing | “A weather reading…” |
-| 0:15–0:35 | Click **Explore demo workspace**. Keep the historical replay banner visible | “Here is one complete journey…” |
-| 0:35–1:00 | Overview date selector: **8 September** missing-data case, then **15 September** humid case, then **12 September** | “First, look at September eighth…” |
-| 1:00–1:20 | Locate seeded **Mavuno A-01**, **1,800 kg**, **18.2%**. Confirm these exact seed values before recording | “Our example lot…” |
-| 1:20–1:45 | Click **Build operator plan**, inspect allocation, then **Create operator jobs** | “I click Build operator plan…” |
+| 0:00–0:15 | Opening explanatory card; add Shivam's real camera here | “A weather reading…” |
+| 0:15–0:45 | Actual welcome screen and **Explore demo workspace** entry; historical replay banner remains visible | “Imagine a yard supervisor…” / “Here is one complete journey…” |
+| 0:45–0:54 | Overview: **8 September** missing-data case | “First, look at September eighth…” |
+| 0:54–1:03 | Overview: **15 September** humid case | “September fifteenth…” |
+| 1:03–1:10 | Return to **12 September**, with six suitable historical hours | “I return to September twelfth…” |
+| 1:10–1:22 | Actual seeded **Mavuno A-01**, **1,800 kg**, **18.2%** detail | “Our example lot…” |
+| 1:22–1:45 | Actual **Build operator plan**, review **2,700 kg / 3,000 kg**, then **Create operator jobs** | “I click Build operator plan…” |
 | 1:45–2:05 | Drying yard: **Complete** Mavuno's spread task, then **Complete** its turn task | “In the Drying yard…” |
 | 2:05–2:25 | Batches → Mavuno A-01 → **Log reading** → **15.0%**. Show measurement history and target | “In Batches…” |
 | 2:25–2:50 | Impact ledger: show Mavuno's **KSh 2,176** rounded tariff equivalent and calculation basis before entering any further measurement | “Now I open the Impact ledger…” |
-| 2:50–3:10 | Return to Mavuno → **Log reading** → **12.7%**. Show resulting moisture-target status | “Back in the batch…” |
+| 2:50–3:10 | Return to Mavuno → **Log reading** → **12.7%** → **Confirm storage readiness** | “Back in the batch…” |
 | 3:10–3:35 | Buyer and pricing slide, explicitly marked hypothesis | “The prospective buyer…” |
-| 3:35–4:00 | Brief server/private-account versus browser-demo explanation. Small architecture view or actual login screen | “Kavu includes…” |
-| 4:00–4:25 | Pilot steps then closing camera view with all actual teammates, verified project links | “The next step…” |
+| 3:35–4:00 | Labelled architecture and contribution-disclosure card; server accounts are described, not simulated in this static recording | “Kavu includes…” |
+| 4:00–4:13 | Labelled proposed-pilot card | “The next step…” |
+| 4:13–4:25 | Closing card; add all actual teammates' real camera appearances here if not already included | “Kavu connects Conduit evidence…” |
 
 ## Rehearsal and capture notes
 

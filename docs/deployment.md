@@ -104,7 +104,7 @@ Store backup copies outside the server, protect them as sensitive operational da
 
 Current schema version is tracked with SQLite `user_version=1`; older application versions reject a database with a newer schema rather than silently downgrading its version. Newly created data directories are private and database files use owner-only permissions on POSIX systems. There is no deployed schema-migration history yet. Future upgrades that change the schema must add reviewed, transactional migrations and a restore-tested backup. SIGINT/SIGTERM stop accepting requests and close SQLite cleanly, with a 10-second shutdown limit.
 
-There is currently no email verification, self-service password recovery, MFA, account-deletion UI or administrative console. Do not promise these features to pilot customers. Password change is supported at `/api/auth/password`; it can be exposed through a future settings UI. For a real pilot, publish a privacy notice, define support/recovery/deletion procedures, monitor backups and perform a deployment-specific security review. Those are operational deployment prerequisites, not evidence of completed customer validation.
+There is currently no email verification, self-service password recovery, MFA, account-deletion UI or administrative console. Do not promise these features to pilot customers. Password change is available in **Account settings**, backed by `/api/auth/password`; changing it revokes existing sessions and requires sign-in again. For a real pilot, publish a privacy notice, define support/recovery/deletion procedures, monitor backups and perform a deployment-specific security review. Those are operational deployment prerequisites, not evidence of completed customer validation.
 
 ## Public static preview
 

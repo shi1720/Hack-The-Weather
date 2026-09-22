@@ -75,7 +75,7 @@ We downloaded three original GeoCSV exports from the [organizer’s public data 
 | 15 September replay | 0 favourable hours; 0 kg outdoor allocation |
 | 8 September gap / source removed | No outdoor allocation; unavailable evidence |
 
-The last three comparisons use fixed example batches and align their deadlines to the selected replay day. This isolates the input-weather difference. They demonstrate **functional dependence on Conduit**, not a performance benchmark against field outcomes. Reproduce them with `npm run evaluate`; read the [evaluation report](docs/evaluation.md).
+The last three comparisons hold the example batches, deadlines and planning date fixed, mapping each source day’s weather onto that planning date while preserving its EAT hour of day. This isolates the input-weather difference. They demonstrate **functional dependence on Conduit**, not a performance benchmark against field outcomes. Reproduce them with `npm run evaluate`; read the [evaluation report](docs/evaluation.md).
 
 The parser preserves original timestamps and rejects malformed/non-finite input, de-duplicates overlaps and marks conflicts. The hourly pipeline uses SHT temperature, SHT relative humidity and primary rain-gauge observations. Missing rain remains unknown. The secondary rain gauge is excluded from decisions rather than silently substituted; radiation sensor counts are not treated as calibrated W/m². The export’s humidity unit label is inconsistent with the platform description, and that interpretation is documented.
 
@@ -162,10 +162,12 @@ Production customer rollout still requires an actual hosting account, TLS/domain
 - [Editable pitch deck](output/kavu-pitch.pptx)
 - [Four-page product/business brief](output/pdf/kavu-brief.pdf)
 - [Verbatim 3–5 minute video script and shot list](docs/submission/video-script.md)
+- [Actual 4:25 silent screen demonstration](output/kavu-demo-silent.mp4)
+- [Recording instructions: add narration and real team appearances](docs/submission/recording-notes.md)
 - [Ready-to-paste Devpost copy](docs/submission/devpost.md)
 - [Judge Q&A / founder cheat sheet](docs/submission/judge-qa.md)
 - [Human handoff checklist](docs/submission/human-handoff.md)
-- [Independent judging review](docs/review/judge-review.md)
+- [Internal judging review](docs/review/judge-review.md)
 
 The video must include the actual eligible team members. A final voice/camera recording and public video URL are not fabricated or substituted by sample content.
 

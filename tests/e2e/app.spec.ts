@@ -83,14 +83,14 @@ test('registration, batch intake, logout and login persist private records', asy
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Test maize E-05' })).toBeVisible();
   await page.getByRole('button', { name: 'Account settings' }).click();
-  await page.getByLabel('Current password', {exact:true}).fill(password);
-  await page.getByLabel('New password', {exact:true}).fill('Changed test password 456!');
-  await page.getByLabel('Confirm new password', {exact:true}).fill('Changed test password 456!');
-  await page.getByRole('button', {name:'Change password',exact:true}).click();
+  await page.getByLabel('Current password', { exact: true }).fill(password);
+  await page.getByLabel('New password', { exact: true }).fill('Changed test password 456!');
+  await page.getByLabel('Confirm new password', { exact: true }).fill('Changed test password 456!');
+  await page.getByRole('button', { name: 'Change password', exact: true }).click();
   await page.getByLabel('Email address').fill(email);
-  await page.getByLabel('Password', {exact:true}).fill('Changed test password 456!');
-  await page.getByRole('button', {name:'Sign in',exact:true}).click();
-  await expect(page.getByRole('button', {name:'Test maize E-05'})).toBeVisible();
+  await page.getByLabel('Password', { exact: true }).fill('Changed test password 456!');
+  await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Test maize E-05' })).toBeVisible();
 });
 
 test('mobile navigation, data evidence and constrained planning remain usable', async ({
@@ -138,7 +138,10 @@ test('welcome and overview have no serious automated accessibility violations', 
   ).toEqual([]);
 });
 
-test('handover includes only the selected plan and missing rainfall stays unknown', async ({ page, context }) => {
+test('handover includes only the selected plan and missing rainfall stays unknown', async ({
+  page,
+  context,
+}) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await demo(page);
   await page.getByLabel('Replay date').selectOption('2026-09-08');

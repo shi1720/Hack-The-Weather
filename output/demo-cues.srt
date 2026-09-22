@@ -1,0 +1,74 @@
+1
+00:00:00,000 --> 00:00:15,000
+OPENING · Add real camera appearance
+A weather reading does not cover a pile of maize. A person does.
+
+2
+00:00:15,000 --> 00:00:45,000
+ENTER THE REAL DEMO
+Explore demo workspace. Historical Conduit weather; sample grain batches.
+
+3
+00:00:45,000 --> 00:00:54,000
+MISSING EVIDENCE · 8 SEPTEMBER
+No observations means no invented drying window.
+
+4
+00:00:54,000 --> 00:01:03,000
+HUMID CONDITIONS · 15 SEPTEMBER
+Available observations can still mean unsuitable weather.
+
+5
+00:01:03,000 --> 00:01:10,000
+WORKED EXAMPLE · 12 SEPTEMBER
+Return to the actual six-hour historical window.
+
+6
+00:01:10,000 --> 00:01:22,000
+MAVUNO A-01 · SEEDED DEMONSTRATION
+1,800 kg at 18.2% moisture. These are sample inputs.
+
+7
+00:01:22,000 --> 00:01:45,000
+REVIEW AND CREATE OPERATOR JOBS
+2,700 kg allocated within a 3,000 kg yard. Whole batches; visible reasons.
+
+8
+00:01:45,000 --> 00:02:05,000
+COMPLETE REAL APP TASKS
+Mavuno spread, then turn. Task completion does not prove grain is dry.
+
+9
+00:02:05,000 --> 00:02:25,000
+LOG A METER READING
+15.0% is still above the 13.0% operating target.
+
+10
+00:02:25,000 --> 00:02:50,000
+TARIFF EQUIVALENT · NOT VERIFIED SAVINGS
+1.8 tonnes × 3.2 percentage points × KSh 377.80 ≈ KSh 2,176.
+
+11
+00:02:50,000 --> 00:03:10,000
+FRESH MEASUREMENT AND STORAGE REVIEW
+12.7% supports the moisture target. Other quality procedures still apply.
+
+12
+00:03:10,000 --> 00:03:35,000
+BUSINESS HYPOTHESIS
+Cooperative buyer. KSh 2,500 per active month/site to test; no customers claimed.
+
+13
+00:03:35,000 --> 00:04:00,000
+TWO MODES · EXPLAINABLE LOGIC
+Browser demo and private server workspaces. Disclose Codex assistance.
+
+14
+00:04:00,000 --> 00:04:13,000
+PROPOSED PILOT
+Observe → shadow → measure adoption, moisture checks and actual costs.
+
+15
+00:04:13,000 --> 00:04:25,000
+CLOSING · Add actual team camera
+Conduit evidence → completed job → new measurement. Every dry hour counts.

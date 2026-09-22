@@ -16,7 +16,9 @@ try {
   await page.goto(url);
   await page.getByRole('button', { name: /Explore demo workspace/ }).click();
   await page.getByRole('heading', { name: 'Make every dry hour count.' }).waitFor();
-  await page.waitForFunction(() => navigator.serviceWorker.controller !== null, undefined, { timeout: 15000 });
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null, undefined, {
+    timeout: 15000,
+  });
   assert.match(await page.locator('.stat').first().innerText(), /6/);
   await context.setOffline(true);
   await page.reload();
@@ -34,7 +36,9 @@ try {
   assert.match(await page.locator('.yard-bay.drying').first().innerText(), /Mavuno A-01/);
   assert.deepEqual(apiRequests, []);
   assert.deepEqual(errors, []);
-  console.log('Static demo passed: real data, offline reload, missing-data policy, plan execution and persisted state; zero API calls or page errors.');
+  console.log(
+    'Static demo passed: real data, offline reload, missing-data policy, plan execution and persisted state; zero API calls or page errors.',
+  );
 } finally {
   await browser.close();
 }

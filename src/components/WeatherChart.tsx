@@ -23,7 +23,7 @@ export default function WeatherChart({
       <div
         className="chart-plot"
         role="img"
-        aria-label="Hourly drying suitability based on station temperature, humidity and rain"
+        aria-label="Hourly drying suitability based on temperature, humidity and rain from the selected weather source"
       >
         <div className="chart-y">
           <span>30°</span>

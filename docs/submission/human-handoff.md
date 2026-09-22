@@ -13,7 +13,7 @@ No claim that these checks are satisfied should be made until the people involve
 
 ## Record the final video
 
-- Use the prepared [verbatim script and shot list](video-script.md) alongside the prepared silent screen recording. The same-batch journey has been rehearsed against the working application.
+- Use the prepared [verbatim script and shot list](video-script.md) alongside the actual [4:25 silent screen recording](../../output/kavu-demo-silent.mp4). Follow the [three finishing steps and exact timings](recording-notes.md). The application clicks, example entries and explanatory cards are already recorded; this asset still needs real narration and member appearances.
 - Shivam records the narration. Every actual team member must appear visibly in the finished video; the rules allow screen recording with voice-over but also require member appearances.
 - Include the historical-replay label and distinguish demonstration lot inputs from real field measurements.
 - Keep the finished video between **3 and 5 minutes**, with readable screens and clear audio.
@@ -22,7 +22,7 @@ No claim that these checks are satisfied should be made until the people involve
 ## Upload and submit
 
 - Upload the finished video to an accessible host. Test its link while signed out; judges must not need a paid account or special access.
-- Add the verified repository, working demo and video links to the final Devpost entry. Use the prepared [Devpost copy](devpost.md), with the actual team information.
+- Add the verified [public repository](https://github.com/shi1720/Hack-The-Weather), [live browser sandbox](https://shi1720.github.io/Hack-The-Weather/) and final video links to the Devpost entry. Use the prepared [Devpost copy](devpost.md), with the actual team information.
 - Read the final entry, confirm required fields and submit through the team's Devpost account before the deadline.
 - Keep the video and repository available through judging, and be ready to explain the implementation using the [judge Q&A](judge-qa.md).
 
@@ -36,6 +36,10 @@ The directly checked deadline is **26 September 2026, 02:15 IST**, equivalent to
 
 **Add later, only if completed:** human code changes, testing, review, customer research, design changes and teammate contributions. The team remains responsible for understanding the project.
 
-## Software-side work to finish independently
+## What is already supplied
 
-These are implementation-owner checks, not additional personal questions for Shivam: reconcile functional claims, execute final tests, verify deployment links, finalize screenshots, make the repository public as required, and ensure documentation reflects the submitted commit. Their evidence belongs in [the control sheet](README.md).
+The repository is public and the browser sandbox is live. The application, source-data pipeline, tests, deployment guidance, editable slide deck, PDF brief, silent demonstration and written submission materials are supplied. The implementation owner reports 103 passing unit/API tests, five passing browser tests, a passing Docker smoke in GitHub CI and a passing signed-out offline smoke against the public sandbox. Current evidence is recorded in [the control sheet](README.md).
+
+The public sandbox is a browser-local demonstration: example data stay in that browser, and it offers no private server account or live forecast. The separate authenticated server and Docker setup are available for self-hosting; a permanent public full-stack host has not been provisioned. The software is prepared for supervised evaluation, with no claimed customer traction, field-validated drying policy or proven production reliability.
+
+The remaining personal actions are real eligible team registration, real voices and camera appearances, the final video upload, and the team's Devpost submission. Public launch verification and the documented software checks are complete.

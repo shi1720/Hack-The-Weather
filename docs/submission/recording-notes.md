@@ -1,5 +1,7 @@
 # Finish the Kavu demonstration recording
 
+Use the timing table below for this prepared edit; its opening has a little more room than the script’s initial shot-list estimate. Read naturally and pause briefly at the end of an action until the next screen appears.
+
 The supplied `output/kavu-demo-silent.mp4` is a real screen recording of the working application, followed by clearly labelled explanatory cards. It is designed to run **4 minutes 25 seconds**. It has no audio or synthetic presenter. Shivam and the actual human team must add narration and camera footage before it becomes the final submission video.
 
 ## The three finishing steps
@@ -15,12 +17,12 @@ The supplied `output/kavu-demo-silent.mp4` is a real screen recording of the wor
 | Time | Recorded content |
 | --- | --- |
 | 0:00–0:15 | Opening explanatory card; place real presenter camera here |
-| 0:15–0:35 | Actual welcome screen and entry into an isolated demonstration workspace |
-| 0:35–0:44 | Actual September 8 gap: no weather evidence |
-| 0:44–0:53 | Actual September 15 humid conditions: no suitable drying hours |
-| 0:53–1:00 | Return to September 12: six suitable historical hours |
-| 1:00–1:20 | Actual Mavuno A-01 detail: 1,800 kg, initial 18.2% |
-| 1:20–1:45 | Actual operator plan review and creation; 2,700 kg allocated within 3,000 kg |
+| 0:15–0:45 | Actual welcome screen and entry into an isolated demonstration workspace |
+| 0:45–0:54 | Actual September 8 gap: no weather evidence |
+| 0:54–1:03 | Actual September 15 humid conditions: no suitable drying hours |
+| 1:03–1:10 | Return to September 12: six suitable historical hours |
+| 1:10–1:22 | Actual Mavuno A-01 detail: 1,800 kg, initial 18.2% |
+| 1:22–1:45 | Actual operator plan review and creation; 2,700 kg allocated within 3,000 kg |
 | 1:45–2:05 | Actual completion of Mavuno spread and turn tasks |
 | 2:05–2:25 | Actual entry of the illustrative 15.0% meter reading |
 | 2:25–2:50 | Actual ledger result: rounded KSh 2,176 tariff equivalent, not savings |
@@ -52,6 +54,8 @@ KAVU_RECORD_URL=http://127.0.0.1:5174 node scripts/record-demo.mjs
 
 The recorder requires the already installed Playwright Chromium and `ffmpeg`; it does not install software. Avoid editing frontend files during the capture, because development hot reload can interrupt the timing. Capture takes about four and a half minutes, plus encoding. The source context records 1920×1080 video, and ffmpeg produces an H.264 MP4 at 24 fps with no audio track and a web-friendly index.
 
+The edit holds one real welcome-screen frame for ten seconds and removes eight and two seconds from stationary detail/plan pauses. Application actions run at their captured speed. The closing is a labelled explanatory card.
+
 Intermediate HTML cards, screenshots, original browser video and a capture manifest are under `output/build/video/`. They are working files rather than additional submission claims. The finished MP4 and SRT are the handoff assets.
 
 ## Final quality check
@@ -62,3 +66,7 @@ Intermediate HTML cards, screenshots, original browser video and a capture manif
 - Listen for clipped audio, long unexplained silences and rushed interface descriptions.
 - Ensure important application text is readable after upload compression.
 - Test the final video URL without a logged-in account and keep it accessible during judging.
+
+## Export verification
+
+The exported asset was checked on 22 September 2026: **265.000 seconds (4:25), 1920×1080, H.264, 24 fps, 4,851,228 bytes (about 4.9 MB), zero audio tracks**. The recorder reported no browser errors and verified the six-hour replay, 1,800 kg seed, 2,700 kg allocation, KSh 2,176 ledger and final ready status. Representative source screenshots and decoded final-video frames were visually inspected. The QA manifest and codec report are retained under `output/build/video/`.

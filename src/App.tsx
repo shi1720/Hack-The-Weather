@@ -409,6 +409,26 @@ export default function App() {
                   )}
                 </div>
               </div>
+              {mode === 'forecast' && forecast && (
+                <div className="device-note">
+                  <Info size={13} />
+                  <span>
+                    <a href="https://api.met.no/" target="_blank" rel="noreferrer">
+                      MET Norway Locationforecast
+                    </a>
+                    {' · '}
+                    <a
+                      href="https://creativecommons.org/licenses/by/4.0/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      CC BY 4.0
+                    </a>
+                    {' · '}Issued {day(forecast.issuedAt)}, {time(forecast.issuedAt)} EAT
+                    {' · '}Drying suitability calculated by Kavu
+                  </span>
+                </div>
+              )}
               {api.isDemoOnly && (
                 <div className="device-note">
                   <Info size={13} />

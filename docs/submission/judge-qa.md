@@ -4,7 +4,7 @@ Use these as accurate answer patterns, not a substitute for knowing the final bu
 
 ## The answer to remember
 
-**Kavu helps a maize-yard supervisor turn environmental evidence into assigned work, then checks the result with a new moisture reading. The commercial value is accountable handling and decision records; the ledger reports a transparent tariff equivalent, not invented savings.**
+**Kavu helps a maize-yard supervisor turn environmental evidence into recorded jobs, then checks the result with a new moisture reading. The commercial value is accountable handling and decision records; the ledger reports a transparent tariff equivalent, not invented savings.**
 
 ## Product and customer questions
 
@@ -50,9 +50,9 @@ Show the actual provenance panel and one recommendation whose reasons refer to u
 
 ### Are you forecasting rain?
 
-“An observation is not a forecast. The replay uses historical environmental evidence. Kavu does not claim a trained rainfall-prediction model. Any future forecast adapter needs its own provenance, issue time, evaluation and licensing; we would not disguise it as a station observation.”
+“An observation is not a forecast. The replay uses historical environmental evidence. The self-hosted server has a separate optional MET Norway forecast adapter with source attribution, issue time and freshness gates. It is not available in the public static sandbox, and stale Conduit observations do not calibrate it. We do not claim a trained rainfall-prediction model or forecast accuracy.”
 
-If a forecast feature is added before submission, replace this answer with its verified implementation and limits. Never evaluate a historical decision using information that became available after that decision.
+The replay uses retrospectively observed full-day weather. It demonstrates the workflow, not what could have been predicted at that time.
 
 ### Why no machine-learning model?
 
@@ -104,9 +104,9 @@ Know the calculation: `5,000 ÷ 1,000 × 2 × 377.80 = 3,778`. The application's
 
 ### How do you avoid counting the same benefit twice?
 
-“The ledger must have a documented moisture baseline and count a given reduction only once. Repeating a reading or receiving a higher reading must not manufacture a new positive value. We exercise those cases in the accounting tests.”
+“The ledger compares the tariff cost of the intake moisture gap to the cost of the latest measured gap, each relative to the target, using the recorded intake mass. It never adds up every downward step. Repeating a reading leaves the equivalent unchanged; a later higher reading reduces it, and it cannot fall below zero. Measurements below the target do not add extra credit.”
 
-Confirm the exact baseline convention in the final engine before explaining it. If the code sums all downward steps after rewetting, the ledger can overstate progress; that needs correction or an explicit different label before publication.
+The formula is in `src/pages/Impact.tsx`; the tested `dryingCost` primitive is in `src/shared/engine.ts`. This is a reference-cost comparison, not a record of paid invoices or conserved physical mass after drying.
 
 ### Does the storage badge mean safe to eat?
 

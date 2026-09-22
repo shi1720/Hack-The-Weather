@@ -14,7 +14,7 @@ const cards = {
   business: { tag:'BUSINESS HYPOTHESIS · EXPLANATORY CARD', title:'One supervisor.<br>Many farmers’ lots.', lead:'Start with maize cooperatives and aggregation yards<br>that already dry grain and use a moisture meter.', tiles:[['KSh 2,500','per active month / site'],['One accountable record','weather → work → measurement'],['To be tested','customer interviews + supervised pilot']], foot:'Price hypothesis. No paying customers, signed pilots or measured savings claimed.' },
   architecture: { tag:'IMPLEMENTED ARCHITECTURE · EXPLANATORY CARD', title:'Two ways to<br>use the same logic.', lead:'The public demo is local to your browser.<br>The self-hosted server supports private accounts and durable records.', tiles:[['Browser demonstration','React · localStorage · historical replay'],['Server application','Express · SQLite · private workspaces'],['Decision engine','Explainable rules · no paid LLM call']], foot:'AI assistance: Codex engineering & documentation. Shivam: product direction & commercial priorities.' },
   pilot: { tag:'NEXT STEP · PROPOSED PILOT', title:'The next proof<br>is in the yard.', lead:'Observe existing work. Compare in shadow mode.<br>Then measure adoption, moisture checks and actual costs.', tiles:[['01 · Observe','Record the existing workflow'],['02 · Compare','Supervisor judgment + explained rules'],['03 · Measure','Tasks · meter readings · real costs']], foot:'Proposed validation. No field outcomes are claimed.' },
-  closing: { tag:'KAVU · FROM DATA TO IMPACT', title:'Evidence.<br>Action.<br>A new measurement.', lead:'Every dry hour counts.', foot:'github.com/shi1720/Hack-The-Weather', aside:'HISTORICAL WEATHER DEMONSTRATION<br>HUMAN NARRATION & TEAM CAMERA TO BE ADDED' },
+  closing: { tag:'KAVU · FROM DATA TO IMPACT', title:'Evidence.<br>Action.<br>A new measurement.', lead:'Every dry hour counts.', foot:'github.com/shi1720/Hack-The-Weather', aside:'HISTORICAL WEATHER DEMONSTRATION<br>MEASURED INPUTS · EXPLAINED DECISIONS' },
 };
 function cardHTML(name){ const c=cards[name]; return `<!doctype html><html><head><meta charset="utf-8"><style>@font-face{font-family:Manrope;src:url(data:font/woff2;base64,${font.toString('base64')})}*{box-sizing:border-box}body{margin:0;background:#213f31;color:#f5f4e9;font-family:Manrope,Arial,sans-serif;width:1920px;height:1080px;overflow:hidden}.card{position:relative;height:100%;padding:80px 100px}.brand{font-size:52px;font-weight:850;letter-spacing:-3px}.brand span{color:#dfcb7a}.tag{font-size:18px;letter-spacing:3px;color:#d9cc8b;font-weight:750;margin:38px 0 30px}h1{font-size:${name==='closing'?94:102}px;line-height:1.07;letter-spacing:-5px;margin:0 0 30px;max-width:1500px;font-weight:740}.lead{font-size:31px;line-height:1.55;color:#dce4d8;max-width:1500px;margin:0}.tiles{display:flex;gap:24px;margin-top:48px;max-width:1680px}.tile{flex:1;padding:27px 30px;background:#2c4c3b;border:1px solid #53705a;border-radius:14px}.tile strong{display:block;color:#ede1a2;font-size:28px;margin-bottom:12px}.tile span{font-size:22px;line-height:1.5;color:#d2dfce}.foot{position:absolute;left:100px;bottom:51px;font-size:19px;color:#bcccbd;max-width:1530px}.aside{position:absolute;right:100px;top:89px;text-align:right;line-height:1.9;color:#b8c9b3;letter-spacing:2px;font-size:15px}.orb{position:absolute;right:-170px;top:320px;width:620px;height:620px;border:1px solid #637051;border-radius:50%;z-index:-1}.orb:before{content:'';position:absolute;inset:42px;border:1px solid #637051;border-radius:50%}.line{position:absolute;left:100px;bottom:108px;width:130px;height:5px;background:#d9cc8b;border-radius:2px}</style></head><body><div class="card"><div class="brand">kavu<span>.</span></div><div class="tag">${c.tag}</div><h1>${c.title}</h1><p class="lead">${c.lead}</p>${c.tiles?`<div class="tiles">${c.tiles.map(([title,body])=>`<div class="tile"><strong>${title}</strong><span>${body}</span></div>`).join('')}</div>`:''}${c.aside?`<div class="aside">${c.aside}</div>`:''}<div class="orb"></div><div class="line"></div><div class="foot">${c.foot}</div></div></body></html>`; }
 for(const name of Object.keys(cards)) await fs.writeFile(path.join(out,`${name}.html`),cardHTML(name));
@@ -65,24 +65,31 @@ try {
 const raw=await page.video().path();
 await fs.writeFile(path.join(out,'raw-video-path.txt'),raw+'\n');
 const run=(command,args)=>new Promise((resolve,reject)=>{const child=spawn(command,args,{stdio:'inherit'});child.on('error',reject);child.on('exit',code=>code===0?resolve():reject(new Error(`${command} exited ${code}`)));});
-await run('ffmpeg',['-y','-hide_banner','-loglevel','warning','-i',raw,'-t',String(duration),'-vf','fps=24','-c:v','libx264','-preset','medium','-crf','26','-pix_fmt','yuv420p','-movflags','+faststart','-an',path.join(root,'output/kavu-demo-silent.mp4')]);
+// Hold the real welcome frame for10s; remove8s/2s from static detail/plan pauses.
+// This aligns the553-word script without speeding up or fabricating an application action.
+const edit = '[0:v]fps=24,split=5[s0][s1][s2][s3][s4];[s0]trim=start=0:end=20,setpts=PTS-STARTPTS[v0];[s1]trim=start=20:end=20.041667,setpts=PTS-STARTPTS,tpad=stop_mode=clone:stop_duration=10,trim=duration=10[v1];[s2]trim=start=20:end=69,setpts=PTS-STARTPTS[v2];[s3]trim=start=77:end=90,setpts=PTS-STARTPTS[v3];[s4]trim=start=92:end=253,setpts=PTS-STARTPTS[v4];[1:v]fps=24,trim=duration=12,setpts=PTS-STARTPTS[v5];[v0][v1][v2][v3][v4][v5]concat=n=6:v=1:a=0[out]';
+await run('ffmpeg',['-y','-hide_banner','-loglevel','warning','-i',raw,'-loop','1','-framerate','24','-i',path.join(out,'13-closing.png'),'-filter_complex',edit,'-map','[out]','-t',String(duration),'-c:v','libx264','-preset','medium','-crf','26','-pix_fmt','yuv420p','-movflags','+faststart','-an',path.join(root,'output/kavu-demo-silent.mp4')]);
 const cues=[
 [0,15,'OPENING · Add real camera appearance','A weather reading does not cover a pile of maize. A person does.'],
-[15,35,'ENTER THE REAL DEMO','Explore demo workspace. Historical Conduit weather; sample grain batches.'],
-[35,44,'MISSING EVIDENCE · 8 SEPTEMBER','No observations means no invented drying window.'],
-[44,53,'HUMID CONDITIONS · 15 SEPTEMBER','Available observations can still mean unsuitable weather.'],
-[53,60,'WORKED EXAMPLE · 12 SEPTEMBER','Return to the actual six-hour historical window.'],
-[60,80,'MAVUNO A-01 · SEEDED DEMONSTRATION','1,800 kg at18.2% moisture. These are sample inputs.'],
-[80,105,'REVIEW AND CREATE OPERATOR JOBS','2,700 kg allocated within a3,000 kg yard. Whole batches; visible reasons.'],
+[15,45,'ENTER THE REAL DEMO','Explore demo workspace. Historical Conduit weather; sample grain batches.'],
+[45,54,'MISSING EVIDENCE · 8 SEPTEMBER','No observations means no invented drying window.'],
+[54,63,'HUMID CONDITIONS · 15 SEPTEMBER','Available observations can still mean unsuitable weather.'],
+[63,70,'WORKED EXAMPLE · 12 SEPTEMBER','Return to the actual six-hour historical window.'],
+[70,82,'MAVUNO A-01 · SEEDED DEMONSTRATION','1,800 kg at 18.2% moisture. These are sample inputs.'],
+[82,105,'REVIEW AND CREATE OPERATOR JOBS','2,700 kg allocated within a 3,000 kg yard. Whole batches; visible reasons.'],
 [105,125,'COMPLETE REAL APP TASKS','Mavuno spread, then turn. Task completion does not prove grain is dry.'],
-[125,145,'LOG A METER READING','15.0% is still above the13.0% operating target.'],
-[145,170,'TARIFF EQUIVALENT · NOT VERIFIED SAVINGS','1.8 tonnes ×3.2 percentage points ×KSh377.80 ≈KSh2,176.'],
+[125,145,'LOG A METER READING','15.0% is still above the 13.0% operating target.'],
+[145,170,'TARIFF EQUIVALENT · NOT VERIFIED SAVINGS','1.8 tonnes × 3.2 percentage points × KSh 377.80 ≈ KSh 2,176.'],
 [170,190,'FRESH MEASUREMENT AND STORAGE REVIEW','12.7% supports the moisture target. Other quality procedures still apply.'],
-[190,215,'BUSINESS HYPOTHESIS','Cooperative buyer. KSh2,500 per active month/site to test; no customers claimed.'],
+[190,215,'BUSINESS HYPOTHESIS','Cooperative buyer. KSh 2,500 per active month/site to test; no customers claimed.'],
 [215,240,'TWO MODES · EXPLAINABLE LOGIC','Browser demo and private server workspaces. Disclose Codex assistance.'],
 [240,253,'PROPOSED PILOT','Observe → shadow → measure adoption, moisture checks and actual costs.'],
 [253,265,'CLOSING · Add actual team camera','Conduit evidence → completed job → new measurement. Every dry hour counts.'],
 ];
 const timestamp=n=>`${String(Math.floor(n/3600)).padStart(2,'0')}:${String(Math.floor(n%3600/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')},000`;
 await fs.writeFile(path.join(root,'output/demo-cues.srt'),cues.map(([start,end,title,copy],i)=>`${i+1}\n${timestamp(start)} --> ${timestamp(end)}\n${title}\n${copy}\n`).join('\n'));
+const probe = await new Promise((resolve,reject)=>{let output='';const child=spawn('ffprobe',['-v','error','-show_streams','-show_format','-of','json',path.join(root,'output/kavu-demo-silent.mp4')]);child.stdout.on('data',chunk=>output+=chunk);child.on('error',reject);child.on('exit',code=>code===0?resolve(JSON.parse(output)):reject(new Error('ffprobe failed')));});
+const video = probe.streams.find(stream=>stream.codec_type==='video');
+if(!video || video.codec_name!=='h264' || video.width!==1920 || video.height!==1080 || Math.abs(Number(probe.format.duration)-duration)>0.1 || probe.streams.some(stream=>stream.codec_type==='audio') || Number(probe.format.size)>50_000_000)throw new Error('Video validation failed.');
+await fs.writeFile(path.join(out,'video-verification.json'),JSON.stringify(probe,null,2));
 console.log('VIDEO READY output/kavu-demo-silent.mp4');
